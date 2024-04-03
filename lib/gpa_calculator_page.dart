@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/input_butten.dart';
 // import 'package:flutter/rendering.dart';
 
-class GpaCalculatorApp extends StatelessWidget {
+//Stateful Widget class
+class GpaCalculatorApp extends StatefulWidget{
   const GpaCalculatorApp({super.key});
+  @override 
+  _GpaCalculatorAppState createState() => _GpaCalculatorAppState();
+}
+
+
+class _GpaCalculatorAppState extends State<GpaCalculatorApp> {
+
+
+  //Boolean value for checking button is pressed or not
+  bool isPositionedVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +149,7 @@ class GpaCalculatorApp extends StatelessWidget {
                                             Container(
                                               padding: const EdgeInsets.all(3),
                                               decoration: ShapeDecoration(
-                                                color: Color(0xFFF5CEC7),
+                                                color: const Color(0xFFF5CEC7),
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(10),
@@ -168,7 +180,7 @@ class GpaCalculatorApp extends StatelessWidget {
                                             Container(
                                               padding: const EdgeInsets.all(3),
                                               decoration: ShapeDecoration(
-                                                color: Color(0xFFF5CEC7),
+                                                color: const Color(0xFFF5CEC7),
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(10),
@@ -197,7 +209,7 @@ class GpaCalculatorApp extends StatelessWidget {
                                             Container(
                                               padding: const EdgeInsets.all(3),
                                               decoration: ShapeDecoration(
-                                                color: Color(0xFFF5CEC7),
+                                                color: const Color(0xFFF5CEC7),
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(10),
@@ -230,7 +242,7 @@ class GpaCalculatorApp extends StatelessWidget {
                                             Container(
                                               padding: const EdgeInsets.all(3),
                                               decoration: ShapeDecoration(
-                                                color: Color(0xFFF5CEC7),
+                                                color: const Color(0xFFF5CEC7),
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(10),
@@ -259,7 +271,7 @@ class GpaCalculatorApp extends StatelessWidget {
                                             Container(
                                               padding: const EdgeInsets.all(3),
                                               decoration: ShapeDecoration(
-                                                color: Color(0xFFF5CEC7),
+                                                color: const Color(0xFFF5CEC7),
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(10),
@@ -315,7 +327,7 @@ class GpaCalculatorApp extends StatelessWidget {
                                               padding: EdgeInsets.symmetric(horizontal: constraints.maxWidth * 5 / 393,
                                                                             vertical: constraints.maxHeight * 3 / 852),
                                               decoration: ShapeDecoration(
-                                                color: Color(0xFFF5CEC7),
+                                                color: const Color(0xFFF5CEC7),
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius: BorderRadius.circular(10),
                                                 ),
@@ -345,7 +357,7 @@ class GpaCalculatorApp extends StatelessWidget {
                                                   horizontal: constraints.maxWidth * 5 / 393,
                                                   vertical: constraints.maxHeight * 3 / 852),
                                               decoration: ShapeDecoration(
-                                                color: Color(0xFFF5CEC7),
+                                                color: const Color(0xFFF5CEC7),
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(10),
@@ -504,7 +516,7 @@ class GpaCalculatorApp extends StatelessWidget {
                                             horizontal: constraints.maxWidth * 5 / 393,
                                             vertical: constraints.maxHeight * 3 / 852),
                                         decoration: ShapeDecoration(
-                                          color: Color(0xFFC6C09C),
+                                          color: const Color(0xFFC6C09C),
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10),
@@ -636,7 +648,7 @@ class GpaCalculatorApp extends StatelessWidget {
                                                 3 /
                                                 852),
                                         decoration: ShapeDecoration(
-                                          color: Color(0xFFC6C09C),
+                                          color: const Color(0xFFC6C09C),
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10),
@@ -1204,7 +1216,57 @@ class GpaCalculatorApp extends StatelessWidget {
                         ))
                   ],
                 )),
-          ]);
+
+
+              //Add Module butten
+              Container(
+                width: constraints.maxWidth,
+                height: constraints.maxHeight,
+                child: Stack(
+                  children: [
+                    Positioned(
+                      left: constraints.maxWidth * 40 / 393,
+                      top: constraints.maxHeight * 450 / 852,
+                      child: Container(
+                        width: 30,
+                        height: 30,
+                        decoration: ShapeDecoration(
+                        color: const Color(0xFFFFC98B),
+                        shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                              ),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      left: constraints.maxWidth * 40 / 393 - 7.5,
+                      top: constraints.maxHeight * 450 / 852  - 8.5,
+                      child:  IconButton(
+                                onPressed: () { 
+                                  setState(() {
+                                    isPositionedVisible = !isPositionedVisible;
+                                  });
+                                },
+                                icon: const Icon(
+                                  Icons.add,
+                                  size: 30,
+                                  color: Colors.white,
+                                ),
+                            )
+                    ),
+                    isPositionedVisible ? 
+                      Positioned(
+                        left: constraints.maxWidth * 40 / 393,
+                        top: constraints.maxHeight * 450 / 852 + 30,
+                        child: const InputButton()
+                      )
+                      : const SizedBox()
+                  ]
+                ),
+              )
+            ],
+          );
+
         },
       ),
     );
