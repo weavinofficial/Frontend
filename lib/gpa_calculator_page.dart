@@ -1238,6 +1238,7 @@ class _GpaCalculatorAppState extends State<GpaCalculatorApp> {
                         ),
                       ),
                     ),
+                    
                     Positioned(
                       left: constraints.maxWidth * 40 / 393 - 7.5,
                       top: constraints.maxHeight * 450 / 852  - 8.5,
@@ -1258,7 +1259,7 @@ class _GpaCalculatorAppState extends State<GpaCalculatorApp> {
                       Positioned(
                         left: constraints.maxWidth * 40 / 393,
                         top: constraints.maxHeight * 450 / 852 + 30,
-                        child: const InputButton()
+                        child: InputButton()
                       )
                       : const SizedBox()
                   ]
