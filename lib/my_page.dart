@@ -12,9 +12,7 @@ class MyPage extends StatelessWidget {
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(statusBarColor: Colors.transparent),
-      
       child: Container(
-        
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -22,7 +20,6 @@ class MyPage extends StatelessWidget {
             colors: [Color(0xffE79796), Color(0xffE79796).withOpacity(0.0)],
           ),
         ),
-        
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: PreferredSize(
@@ -92,7 +89,8 @@ class MyPage extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(left: 42.0, top: 20.0, right: 42.0),
+                        margin:
+                            EdgeInsets.only(left: 42.0, top: 20.0, right: 42.0),
                         height: 113,
                         decoration: BoxDecoration(
                           color: Color.fromARGB(255, 255, 177, 132),
@@ -128,7 +126,8 @@ class MyPage extends StatelessWidget {
                                       height: 10,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: Color.fromARGB(255, 255, 177, 132),
+                                        color:
+                                            Color.fromARGB(255, 255, 177, 132),
                                       ),
                                     ),
                                   ),
@@ -140,7 +139,8 @@ class MyPage extends StatelessWidget {
                                       height: 30,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: Color.fromARGB(255, 255, 177, 132),
+                                        color:
+                                            Color.fromARGB(255, 255, 177, 132),
                                       ),
                                     ),
                                   ),
@@ -152,7 +152,8 @@ class MyPage extends StatelessWidget {
                                       height: 25,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: Color.fromARGB(255, 255, 177, 132),
+                                        color:
+                                            Color.fromARGB(255, 255, 177, 132),
                                       ),
                                     ),
                                   ),
@@ -164,7 +165,8 @@ class MyPage extends StatelessWidget {
                                       height: 15,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: Color.fromARGB(255, 255, 177, 132),
+                                        color:
+                                            Color.fromARGB(255, 255, 177, 132),
                                       ),
                                     ),
                                   ),
@@ -176,14 +178,17 @@ class MyPage extends StatelessWidget {
                                       height: 30,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: Color.fromARGB(255, 255, 177, 132),
+                                        color:
+                                            Color.fromARGB(255, 255, 177, 132),
                                       ),
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                            SizedBox(width: 10), // Add some space between the box and the text
+                            SizedBox(
+                                width:
+                                    10), // Add some space between the box and the text
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -209,7 +214,8 @@ class MyPage extends StatelessWidget {
                                   Align(
                                     alignment: Alignment.centerRight,
                                     child: Padding(
-                                      padding: EdgeInsets.only(top: 10.0, right: 20.0),
+                                      padding: EdgeInsets.only(
+                                          top: 10.0, right: 20.0),
                                       child: ElevatedButton(
                                         onPressed: () {
                                           // TODO: Link to GPA Calculator
@@ -224,10 +230,13 @@ class MyPage extends StatelessWidget {
                                         ),
                                         style: ElevatedButton.styleFrom(
                                           shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(20),
-                                            side: BorderSide(color: Colors.white),
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            side:
+                                                BorderSide(color: Colors.white),
                                           ),
-                                          backgroundColor: Color.fromARGB(255, 255, 178, 132),
+                                          backgroundColor: Color.fromARGB(
+                                              255, 255, 178, 132),
                                         ),
                                       ),
                                     ),
@@ -254,8 +263,10 @@ class MyPage extends StatelessWidget {
                         child: Container(
                           margin: EdgeInsets.symmetric(horizontal: 42.0),
                           child: ListView.separated(
-                            itemCount: 10, // replace with your actual list length
-                            separatorBuilder: (context, index) => Divider(color: Colors.grey),
+                            itemCount:
+                                10, // TODO: Replace with actual list length
+                            separatorBuilder: (context, index) =>
+                                Divider(color: Color(0xffE79796)),
                             itemBuilder: (context, index) {
                               return Container(
                                 margin: EdgeInsets.only(bottom: 10.0),
@@ -268,25 +279,37 @@ class MyPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Row(
                                           children: [
                                             Container(
-                                              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 10.0,
+                                                  vertical: 5.0),
                                               decoration: BoxDecoration(
                                                 color: Color(0xffE79796),
-                                                borderRadius: BorderRadius.circular(20.0),
+                                                borderRadius:
+                                                    BorderRadius.circular(20.0),
                                               ),
-                                              child: Row( 
+                                              child: Row(
                                                 mainAxisSize: MainAxisSize.min,
                                                 children: [
                                                   Text(
                                                     'Tag ${index + 1}',
-                                                    style: TextStyle(color: Colors.white, fontFamily: 'GmarketSans', fontSize: 14, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontFamily:
+                                                            'GmarketSans',
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   ),
                                                   SizedBox(width: 10.0),
-                                                  Image.asset('assets/images/tag_icon.png', color: Colors.white),                        
+                                                  Image.asset(
+                                                      'assets/images/tag_icon.png',
+                                                      color: Colors.white),
                                                 ],
                                               ),
                                             ),
@@ -314,8 +337,9 @@ class MyPage extends StatelessWidget {
                                     SizedBox(height: 10.0),
                                     Text(
                                       'Content ${index + 1}',
-                                      
-                                      style: TextStyle(fontSize: 12, fontFamily: 'GmarketSans'),
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          fontFamily: 'GmarketSans'),
                                     ),
                                   ],
                                 ),
