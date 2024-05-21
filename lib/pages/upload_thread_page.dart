@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:myapp/input_butten.dart';
 
 class upload_thread_page extends StatefulWidget {
   const upload_thread_page({super.key});

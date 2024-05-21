@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/create_account.dart';
+import 'package:frontend/pages/create_account_page.dart';
 
 class StartPage extends StatelessWidget {
   const StartPage({super.key});

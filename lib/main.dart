@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/pages/home_page.dart';
 //import 'package:frontend/create_account.dart';
-import 'package:frontend/log_in_page.dart';
+import 'package:frontend/pages/log_in_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       home: Scaffold(
-        body: StartPage(),
+        body: HomePage(),
       ),
     );
   }
