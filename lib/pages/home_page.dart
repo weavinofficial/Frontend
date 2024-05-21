@@ -57,6 +57,7 @@ class HomePage extends StatelessWidget {
               category: Category.tips,
               rank: 1),
         ]),
+        CustomNavigationBar()
       ],
     );
   }

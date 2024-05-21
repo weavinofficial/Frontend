@@ -18,12 +18,12 @@ class _HomeHeaderState extends State<HomeHeader> {
     return Stack(
       children: [
         SizedBox(
-          height: 300,
+          height: 270,
           width: MediaQuery.of(context).size.width,
         ),
         Positioned(
           left: MediaQuery.of(context).size.width / 2 - 270,
-          top: -150,
+          top: -170,
           child: Image.asset('images/homeBackground.png', scale: 0.7),
         ),
         Positioned(
@@ -31,7 +31,7 @@ class _HomeHeaderState extends State<HomeHeader> {
           child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.only(top: 30),
+                padding: const EdgeInsets.only(top: 25),
                 child: SearchAnchor(
                     viewElevation: 0,
                     viewShape: const RoundedRectangleBorder(
@@ -87,7 +87,7 @@ class _HomeHeaderState extends State<HomeHeader> {
                       });
                     }),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               const SizedBox(
                 width: 330,
                 child: Text(

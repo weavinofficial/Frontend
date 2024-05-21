@@ -14,7 +14,7 @@ class PostOverviews extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 390,
+      height: 400,
       child: SingleChildScrollView(
         child: Column(
           children: [
