@@ -77,19 +77,19 @@ class _CommunityPageState extends State<CommunityPage>
         child: Container(
           decoration: BoxDecoration(
             color: isSelected
-                ? Color.fromRGBO(255, 255, 255, 0.75)
+                ? const Color.fromRGBO(255, 255, 255, 0.75)
                 : Colors.transparent,
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(25),
               topRight: Radius.circular(25),
             ),
           ),
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
           child: Center(
             child: Text(
               tabNames[currentTabIndex + index],
               style: TextStyle(
-                color: isSelected ? Color(0xffE79796) : Colors.white,
+                color: isSelected ? const Color(0xffE79796) : Colors.white,
                 fontFamily: 'GmarketSans',
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
@@ -103,14 +103,15 @@ class _CommunityPageState extends State<CommunityPage>
 
   Widget _buildTabContent(String tabName) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 42.0, vertical: 20.0),
+      margin: const EdgeInsets.symmetric(horizontal: 42.0, vertical: 20.0),
       child: ListView.separated(
         itemCount: 10, // TODO: replace with actual list length
-        separatorBuilder: (context, index) => Divider(color: Color(0xffE79796)),
+        separatorBuilder: (context, index) =>
+            const Divider(color: Color(0xffE79796)),
         itemBuilder: (context, index) {
           return Container(
-            margin: EdgeInsets.only(bottom: 10.0),
-            padding: EdgeInsets.all(10.0),
+            margin: const EdgeInsets.only(bottom: 10.0),
+            padding: const EdgeInsets.all(10.0),
             decoration: BoxDecoration(
               color: Colors.transparent,
               borderRadius: BorderRadius.circular(10.0),
@@ -124,10 +125,10 @@ class _CommunityPageState extends State<CommunityPage>
                     Row(
                       children: [
                         Container(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 10.0, vertical: 5.0),
                           decoration: BoxDecoration(
-                            color: Color(0xffE79796),
+                            color: const Color(0xffE79796),
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           child: Row(
@@ -135,22 +136,22 @@ class _CommunityPageState extends State<CommunityPage>
                             children: [
                               Text(
                                 'Tag ${index + 1}',
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Colors.white,
                                     fontFamily: 'GmarketSans',
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold),
                               ),
-                              SizedBox(width: 10.0),
+                              const SizedBox(width: 10.0),
                               Image.asset('assets/images/tag_icon.png',
                                   color: Colors.white),
                             ],
                           ),
                         ),
-                        SizedBox(width: 20.0),
+                        const SizedBox(width: 20.0),
                         Text(
                           'Post ${index + 1}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontFamily: 'GmarketSans',
                             fontSize: 14.0,
                             fontWeight: FontWeight.bold,
@@ -160,7 +161,7 @@ class _CommunityPageState extends State<CommunityPage>
                     ),
                     Text(
                       'Date ${index + 1}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: 'GmarketSans',
                         fontSize: 14.0,
                         fontWeight: FontWeight.bold,
@@ -168,10 +169,11 @@ class _CommunityPageState extends State<CommunityPage>
                     ),
                   ],
                 ),
-                SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
                 Text(
                   'Content ${index + 1}',
-                  style: TextStyle(fontSize: 12, fontFamily: 'GmarketSans'),
+                  style:
+                      const TextStyle(fontSize: 12, fontFamily: 'GmarketSans'),
                 ),
               ],
             ),
@@ -187,7 +189,7 @@ class _CommunityPageState extends State<CommunityPage>
     double relativeHeight = MediaQuery.of(context).size.height * (630 / 896);
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+      value: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Container(
@@ -195,12 +197,15 @@ class _CommunityPageState extends State<CommunityPage>
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [Color(0xffE79796), Color(0xffE79796).withOpacity(0.0)],
+              colors: [
+                const Color(0xffE79796),
+                const Color(0xffE79796).withOpacity(0.0)
+              ],
             ),
           ),
           child: Column(
             children: <Widget>[
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               Stack(
                 children: [
                   Positioned(
@@ -210,7 +215,8 @@ class _CommunityPageState extends State<CommunityPage>
                         width: 503.5, height: 181),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 100, left: 45, right: 16),
+                    padding:
+                        const EdgeInsets.only(top: 100, left: 45, right: 16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -223,56 +229,57 @@ class _CommunityPageState extends State<CommunityPage>
                             child: TextField(
                               decoration: InputDecoration(
                                 hintText: "Search",
-                                hintStyle: TextStyle(
+                                hintStyle: const TextStyle(
                                   color: Colors.black,
                                   fontFamily: 'GmarketSans',
                                   fontSize: 11,
                                 ),
-                                prefixIcon: Icon(Icons.search),
+                                prefixIcon: const Icon(Icons.search),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30),
                                   borderSide: BorderSide.none,
                                 ),
-                                fillColor: Color.fromRGBO(255, 255, 255, 0.75),
+                                fillColor:
+                                    const Color.fromRGBO(255, 255, 255, 0.75),
                                 filled: true,
                               ),
                             ),
                           ),
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             ElevatedButton(
                               onPressed: () {},
-                              child: Text('Hot'),
                               style: ElevatedButton.styleFrom(
                                 foregroundColor: Colors.white,
                                 backgroundColor: Colors.transparent,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
-                                  side: BorderSide(color: Colors.white),
+                                  side: const BorderSide(color: Colors.white),
                                 ),
                                 elevation: 0,
                               ),
+                              child: const Text('Hot'),
                             ),
-                            SizedBox(width: 16),
+                            const SizedBox(width: 16),
                             ElevatedButton(
                               onPressed: () {},
-                              child: Text('Recent'),
                               style: ElevatedButton.styleFrom(
                                 foregroundColor: Colors.white,
                                 backgroundColor: Colors.transparent,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
-                                  side: BorderSide(color: Colors.white),
+                                  side: const BorderSide(color: Colors.white),
                                 ),
                                 elevation: 0,
                               ),
+                              child: const Text('Recent'),
                             ),
                           ],
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                       ],
                     ),
                   ),
@@ -283,7 +290,8 @@ class _CommunityPageState extends State<CommunityPage>
                 children: [
                   if (currentTabIndex > 0)
                     IconButton(
-                      icon: Icon(Icons.arrow_back, color: Colors.white),
+                      icon:
+                          const Icon(Icons.arrow_back_ios, color: Colors.white),
                       onPressed: _prevTabSet,
                     ),
                   Expanded(
@@ -300,7 +308,8 @@ class _CommunityPageState extends State<CommunityPage>
                   ),
                   if (currentTabIndex + tabsPerPage < tabCount)
                     IconButton(
-                      icon: Icon(Icons.arrow_forward, color: Colors.white),
+                      icon: const Icon(Icons.arrow_forward_ios,
+                          color: Colors.white),
                       onPressed: _nextTabSet,
                     ),
                 ],
@@ -312,7 +321,7 @@ class _CommunityPageState extends State<CommunityPage>
                     width: width,
                     height: relativeHeight,
                     decoration: BoxDecoration(
-                      color: Color.fromRGBO(255, 255, 255, 0.75),
+                      color: const Color.fromRGBO(255, 255, 255, 0.75),
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(
                             (currentTabIndex == 0 && _tabController.index == 0)

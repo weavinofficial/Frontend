@@ -1,40 +1,69 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/pages/choose_faculty_page.dart';
 
-bool _showPassword = true;
-
-class CreateAccountPage extends StatelessWidget {
+class CreateAccountPage extends StatefulWidget {
   const CreateAccountPage({super.key});
+
+  @override
+  State<CreateAccountPage> createState() => _CreateAccountPageState();
+}
+
+class _CreateAccountPageState extends State<CreateAccountPage> {
+  bool _showPassword = true;
+  bool _showConfirmPassword = true;
+  final _emailController = TextEditingController(text: '@u.nus.edu');
+  final _formKey = GlobalKey<FormState>();
+
+  var _enteredName = '';
+  var _enteredEmail = '';
+  var _enteredPassword = '';
+  var _enteredConfirmPassword = '';
+
+  void _submit() {
+    final isValid = _formKey.currentState!.validate();
+
+    if (isValid) {
+      _formKey.currentState!.save();
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _emailController.selection =
+        TextSelection.fromPosition(const TextPosition(offset: 0));
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Container(
-        color: Colors.white,
-        child: Scaffold(
-          body: LayoutBuilder(
-            builder: (context, constraints) {
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    // padding above iconbutton
-                    const SizedBox(height: 20),
-                    Row(
-                      children: [
-                        const SizedBox(width: 12),
-                        IconButton(
-                          onPressed: () => Navigator.pop(context),
-                          icon: const Icon(
-                            Icons.arrow_back_ios_new,
-                            color: Color.fromARGB(255, 231, 151, 150),
-                          ),
+      child: Scaffold(
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  // padding above iconbutton
+                  const SizedBox(height: 20),
+                  Row(
+                    children: [
+                      const SizedBox(width: 12),
+                      IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: const Icon(
+                          Icons.arrow_back_ios_new,
+                          color: Color.fromARGB(255, 231, 151, 150),
                         ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(width: constraints.maxWidth * 0.07),
-                        SizedBox(
-                          width: constraints.maxWidth * 0.86,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(width: constraints.maxWidth * 0.07),
+                      SizedBox(
+                        width: constraints.maxWidth * 0.86,
+                        child: Form(
+                          key: _formKey,
                           child: Column(
                             children: [
                               // padding below iconbutton
@@ -98,10 +127,11 @@ class CreateAccountPage extends StatelessWidget {
                                   return null;
                                 },
                                 onSaved: (value) {
-                                  //_enteredName = value!;
+                                  _enteredName = value!;
                                 },
                               ),
                               const SizedBox(height: 15),
+
                               //E-MAIL
                               const Row(
                                 children: [
@@ -119,6 +149,26 @@ class CreateAccountPage extends StatelessWidget {
                               ),
                               const SizedBox(height: 9),
                               TextFormField(
+                                controller: _emailController,
+                                keyboardType: TextInputType.emailAddress,
+                                autocorrect: false,
+                                textCapitalization: TextCapitalization.none,
+                                validator: (value) {
+                                  if (value == null ||
+                                      value.trim().isEmpty ||
+                                      !value.endsWith('@u.nus.edu')) {
+                                    return 'Enter a valid email address.';
+                                  }
+                                  return null;
+                                },
+                                onTap: () {
+                                  if (_emailController.text == '@u.nus.edu') {
+                                    _emailController.selection =
+                                        TextSelection.fromPosition(
+                                      const TextPosition(offset: 0),
+                                    );
+                                  }
+                                },
                                 decoration: InputDecoration(
                                   contentPadding: const EdgeInsets.all(16),
                                   border: OutlineInputBorder(
@@ -134,20 +184,12 @@ class CreateAccountPage extends StatelessWidget {
                                         fontSize: 15),
                                   ),
                                 ),
-                                validator: (value) {
-                                  if (value == null ||
-                                      value.isEmpty ||
-                                      value.trim().length < 4 ||
-                                      value.trim().length > 10) {
-                                    return 'Your username must be between 4 and 10 characters.';
-                                  }
-                                  return null;
-                                },
                                 onSaved: (value) {
-                                  //_enteredName = value!;
+                                  _enteredEmail = value!;
                                 },
                               ),
                               const SizedBox(height: 15),
+
                               //PASSWORD
                               const Row(
                                 children: [
@@ -165,10 +207,13 @@ class CreateAccountPage extends StatelessWidget {
                               ),
                               const SizedBox(height: 9),
                               TextFormField(
+                                obscureText: true,
                                 decoration: InputDecoration(
                                   suffixIcon: IconButton(
                                     onPressed: () {
-                                      _showPassword = !_showPassword;
+                                      setState(() {
+                                        _showPassword = !_showPassword;
+                                      });
                                     },
                                     icon: Icon(
                                       _showPassword
@@ -196,17 +241,18 @@ class CreateAccountPage extends StatelessWidget {
                                 validator: (value) {
                                   if (value == null ||
                                       value.isEmpty ||
-                                      value.trim().length < 4 ||
-                                      value.trim().length > 10) {
-                                    return 'Your username must be between 4 and 10 characters.';
+                                      value.trim().length < 6 ||
+                                      value.trim().length > 15) {
+                                    return 'Your password must be between 6 and 15 characters.';
                                   }
                                   return null;
                                 },
                                 onSaved: (value) {
-                                  //_enteredName = value!;
+                                  _enteredPassword = value!;
                                 },
                               ),
                               const SizedBox(height: 15),
+
                               //CONFIRM PASSWORD
                               const Row(
                                 children: [
@@ -224,13 +270,17 @@ class CreateAccountPage extends StatelessWidget {
                               ),
                               const SizedBox(height: 9),
                               TextFormField(
+                                obscureText: true,
                                 decoration: InputDecoration(
                                   suffixIcon: IconButton(
                                     onPressed: () {
-                                      _showPassword = !_showPassword;
+                                      setState(() {
+                                        _showConfirmPassword =
+                                            !_showConfirmPassword;
+                                      });
                                     },
                                     icon: Icon(
-                                      _showPassword
+                                      _showConfirmPassword
                                           ? Icons.visibility
                                           : Icons.visibility_off,
                                       color: const Color.fromARGB(
@@ -255,14 +305,18 @@ class CreateAccountPage extends StatelessWidget {
                                 validator: (value) {
                                   if (value == null ||
                                       value.isEmpty ||
-                                      value.trim().length < 4 ||
-                                      value.trim().length > 10) {
-                                    return 'Your username must be between 4 and 10 characters.';
+                                      value.trim().length < 6 ||
+                                      value.trim().length > 15) {
+                                    return 'Your password must be between 6 and 15 characters.';
                                   }
                                   return null;
                                 },
                                 onSaved: (value) {
-                                  //_enteredName = value!;
+                                  _enteredConfirmPassword = value!;
+                                  if (_enteredConfirmPassword !=
+                                      _enteredPassword) {
+                                    // send error message
+                                  }
                                 },
                               ),
                               const SizedBox(height: 40),
@@ -306,8 +360,15 @@ class CreateAccountPage extends StatelessWidget {
                                             ),
                                           ),
                                           child: ElevatedButton(
-                                            onPressed:
-                                                () {}, // navigate to next page
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const FacultyPage(),
+                                                ),
+                                              );
+                                            }, // navigate to next page
                                             style: ButtonStyle(
                                               shadowColor:
                                                   const MaterialStatePropertyAll(
@@ -320,32 +381,36 @@ class CreateAccountPage extends StatelessWidget {
                                                   RoundedRectangleBorder>(
                                                 RoundedRectangleBorder(
                                                   borderRadius:
+                                                      // Round corners
                                                       BorderRadius.circular(
-                                                          30.0), // Round corners
+                                                          30.0),
                                                 ),
                                               ),
                                             ),
-                                            child: const Row(
-                                              children: [
-                                                Text(
-                                                  "Next",
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 14,
-                                                    fontFamily: 'GmarketSans',
-                                                    fontWeight: FontWeight.w600,
-                                                    height: 0,
+                                            child: const SingleChildScrollView(
+                                              scrollDirection: Axis.horizontal,
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    "Next",
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 14,
+                                                      fontFamily: 'GmarketSans',
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      height: 0,
+                                                    ),
                                                   ),
-                                                ),
-                                                SizedBox(
-                                                    width:
-                                                        5), // Spacing between Next and >
-                                                Icon(
-                                                  Icons
-                                                      .arrow_forward_ios_rounded,
-                                                  color: Colors.white,
-                                                ),
-                                              ],
+                                                  // Spacing between Next and >
+                                                  SizedBox(width: 12),
+                                                  Icon(
+                                                    Icons
+                                                        .arrow_forward_ios_rounded,
+                                                    color: Colors.white,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -357,13 +422,13 @@ class CreateAccountPage extends StatelessWidget {
                             ],
                           ),
                         ),
-                      ],
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );

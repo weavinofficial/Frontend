@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/pages/home_page.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -11,7 +12,6 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage> {
   bool pressed = false;
-
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,6 @@ class _WelcomePageState extends State<WelcomePage> {
               top: constraints.maxHeight * 0.8,
               child: SizedBox(
                 width: 200,
-                height: 45,
                 child: OutlinedButton.icon(
                   label: const Icon(
                     Icons.arrow_forward_ios,
@@ -51,6 +50,14 @@ class _WelcomePageState extends State<WelcomePage> {
                     setState(() {
                       pressed = !pressed;
                     });
+                    //for testing
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomePage(),
+                      ),
+                    );
+                    //for testing
                   },
                   style: OutlinedButton.styleFrom(
                     side: const BorderSide(width: 2, color: Color(0xFFE79796)),
