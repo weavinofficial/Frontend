@@ -32,6 +32,7 @@ class _WelcomePageState extends State<WelcomePage> {
               top: constraints.maxHeight * 0.8,
               child: SizedBox(
                 width: 200,
+                height: 45,
                 child: OutlinedButton.icon(
                   label: const Icon(
                     Icons.arrow_forward_ios,

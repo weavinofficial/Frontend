@@ -5,8 +5,9 @@ import 'package:frontend/widgets/input_butten.dart';
 //Stateful Widget class
 class GpaCalculatorApp extends StatefulWidget {
   const GpaCalculatorApp({super.key});
+
   @override
-  _GpaCalculatorAppState createState() => _GpaCalculatorAppState();
+  State<GpaCalculatorApp> createState() => _GpaCalculatorAppState();
 }
 
 class _GpaCalculatorAppState extends State<GpaCalculatorApp> {

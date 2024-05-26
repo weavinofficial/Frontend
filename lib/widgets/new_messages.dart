@@ -10,7 +10,7 @@ class NewMessage extends StatefulWidget {
 }
 
 class _NewMessageState extends State<NewMessage> {
-  var _messageController = TextEditingController();
+  final _messageController = TextEditingController();
 
   @override
   void dispose() {
@@ -32,22 +32,25 @@ class _NewMessageState extends State<NewMessage> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 15, right: 1, bottom: 14),
-      child: Row(children: [
-        Expanded(
-          child: TextField(
-            controller: _messageController,
-            decoration: const InputDecoration(labelText: 'Send a message'),
-            textCapitalization: TextCapitalization.none,
+    return Container(
+      decoration: ShapeDecoration(shape: CircleBorder()),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 15, right: 1, bottom: 14),
+        child: Row(children: [
+          Expanded(
+            child: TextField(
+              controller: _messageController,
+              decoration: const InputDecoration(labelText: 'Send a message'),
+              textCapitalization: TextCapitalization.none,
+            ),
           ),
-        ),
-        IconButton(
-          icon: const Icon(Icons.send),
-          //icon: Image.asset('assets/images/share.svg'),
-          onPressed: _submitMessage,
-        ),
-      ]),
+          IconButton(
+            icon: const Icon(Icons.send),
+            //icon: Image.asset('assets/images/share.svg'),
+            onPressed: _submitMessage,
+          ),
+        ]),
+      ),
     );
   }
 }
