@@ -353,7 +353,7 @@ class MyPage extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: MediaQuery.of(context).size.height - relativeHeight - 110,
+                top: MediaQuery.of(context).size.height - 1.25 * relativeHeight,
                 left: 36.0,
                 child: Stack(
                   children: [

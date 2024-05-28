@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/widgets/chat_messages.dart';
-import 'package:frontend/widgets/new_messages.dart';
+import 'package:frontend/widgets/chat_app/chat_messages.dart';
+import 'package:frontend/widgets/chat_app/new_messages.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
