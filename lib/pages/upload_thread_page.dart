@@ -791,7 +791,7 @@ class _uploadThreadPageState extends State<upload_thread_page> {
                   //Writing post body frame and shape
                   SizedBox(
                     width: 297,
-                    height: 190,
+                    height: 300,
                     child: Stack(
                       children: [
                         Positioned(
@@ -1079,8 +1079,8 @@ class _uploadThreadPageState extends State<upload_thread_page> {
 
                             //Text field for body of the post
                             const SizedBox(
-                              height: 110,
-                              width: 243,
+                              height: 90,
+                              width: 240,
                               child: TextField(
                                 style: TextStyle(
                                   color: Color(0xFF727272),
@@ -1155,7 +1155,6 @@ class _uploadThreadPageState extends State<upload_thread_page> {
                     ),
                   ),
 
-                  const SizedBox(height: 35),
 
                   //Post button
                   TextButton(
@@ -1170,13 +1169,13 @@ class _uploadThreadPageState extends State<upload_thread_page> {
                       shape: RoundedRectangleBorder(
                         side: const BorderSide(
                             width: 1, color: Colors.white), // Border
-                        borderRadius: BorderRadius.circular(20), // BorderRadius
+                        borderRadius: BorderRadius.circular(40), // BorderRadius
                       ),
                     ),
                     child: const Text(
                       'Post',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 35,
                         fontFamily: 'Noto Sans',
                         fontWeight: FontWeight.w700,
                       ),

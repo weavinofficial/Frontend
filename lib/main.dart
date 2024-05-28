@@ -1,6 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/pages/chat_page.dart';
 import 'package:frontend/pages/start_page.dart';
+import 'package:frontend/pages/account_created_page.dart';
+import 'package:frontend/pages/choose_faculty_page.dart';
+import 'package:frontend/pages/community_page.dart';
+import 'package:frontend/pages/gpa_calculator_page.dart';
+import 'package:frontend/pages/home_page.dart';
+import 'package:frontend/pages/message_list.dart';
+
+import 'package:frontend/pages/my_page.dart';
+import 'package:frontend/pages/upload_thread_page.dart';
+import 'package:frontend/pages/welcome_page.dart';
+
+
 
 void main() {
   runApp(const MyApp());
@@ -11,9 +23,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
       home: Scaffold(
-        body: StartPage(),
+        body: MessageList(),
       ),
     );
   }

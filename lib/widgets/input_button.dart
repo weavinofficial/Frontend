@@ -187,9 +187,9 @@ class _InputButtonState extends State<InputButton> {
 
 
               //Add Button
-              const SizedBox(width: 30),
+              const SizedBox(width: 25),
               Container(
-                width: 25,
+                width: 30,
                 height: 21,
                 padding: const EdgeInsets.all(5),
                 decoration: ShapeDecoration(
@@ -207,7 +207,7 @@ class _InputButtonState extends State<InputButton> {
                       'Add',
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 8,
+                        fontSize: 9,
                         fontFamily: 'Noto Sans',
                         fontWeight: FontWeight.w700,
                         height: 0,
