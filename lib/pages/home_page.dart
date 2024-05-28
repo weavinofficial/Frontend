@@ -10,6 +10,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         HomeHeader(),
         PostOverviews(trendingPostOverviews: [
