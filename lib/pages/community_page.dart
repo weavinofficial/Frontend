@@ -13,7 +13,7 @@ class _CommunityPageState extends State<CommunityPage>
   late TabController _tabController;
   int currentTabIndex = 0;
   final int tabCount = 12;
-  final int tabsPerPage = 4;
+  final int tabsPerPage = 3;
   final List<String> tabNames = [
     'General',
     'Humor',
@@ -86,14 +86,14 @@ class _CommunityPageState extends State<CommunityPage>
               topRight: Radius.circular(25),
             ),
           ),
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
           child: Center(
             child: Text(
               tabNames[currentTabIndex + index],
               style: TextStyle(
                 color: isSelected ? const Color(0xffE79796) : Colors.white,
                 fontFamily: 'GmarketSans',
-                fontSize: 14,
+                fontSize: 12,
                 fontWeight: FontWeight.bold,
               ),
             ),
