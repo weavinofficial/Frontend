@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 const Color bottonNavBgColor = Color(0x00ffc38a);
 const icons = [
@@ -19,32 +21,76 @@ class CustomNavigationBar extends StatefulWidget {
 class _CustomNavigationBarState extends State<CustomNavigationBar> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 30),
-      padding: EdgeInsets.only(left: 30, right: 30),
-      width: 400,
-      height: 56, //TODO: In Future remove the height
-      decoration: BoxDecoration(
-        color: bottonNavBgColor.withOpacity(0.8),
-        borderRadius: const BorderRadius.all(Radius.circular(24)),
-        boxShadow: [
-          BoxShadow(
-            color: bottonNavBgColor.withOpacity(0.3),
-            offset: const Offset(0, 20),
-            blurRadius: 20,
-          ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: List.generate(
-            5,
-            (index) => IconButton(
-                  onPressed: () => {},
-                  icon: Icon(icons[index]),
-                  style: const ButtonStyle(
-                      foregroundColor: MaterialStatePropertyAll(Colors.white)),
-                )),
+    return SafeArea(
+      top: false,
+      child: SizedBox(
+        height: 100,
+        width: 350,
+        child: Stack(
+          children: [
+            Positioned(
+              top: 40,
+              child: SizedBox(
+                height: 56,
+                child: Container(
+                    padding: const EdgeInsets.only(left: 30, right: 30),
+                    width: 350,
+                    decoration: BoxDecoration(
+                      color: bottonNavBgColor.withOpacity(0.8),
+                      borderRadius: const BorderRadius.all(Radius.circular(24)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: bottonNavBgColor.withOpacity(0.3),
+                          offset: const Offset(0, 20),
+                          blurRadius: 20,
+                        ),
+                      ],
+                    ),
+                    child: Stack(alignment: Alignment.center, children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: List.generate(
+                            5,
+                            (index) => index == 2
+                                ? SizedBox(
+                                    width: 50,
+                                    child: Container(),
+                                  )
+                                : IconButton(
+                                    onPressed: () => {},
+                                    icon: Icon(icons[index]),
+                                    style: const ButtonStyle(
+                                        foregroundColor:
+                                            MaterialStatePropertyAll(
+                                                Colors.white)))),
+                      ),
+                      Positioned(
+                        top: -35,
+                        child: Container(
+                          height: 65,
+                          width: 65,
+                          decoration: const BoxDecoration(
+                              color: Colors.white, shape: BoxShape.circle),
+                        ),
+                      ),
+                    ])),
+              ),
+            ),
+            Positioned(
+                left: 148,
+                top: 6,
+                child: FloatingActionButton(
+                  backgroundColor: bottonNavBgColor.withOpacity(0.8),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)),
+                  onPressed: () {},
+                  child: const Icon(
+                    Icons.add,
+                    color: Colors.white,
+                  ),
+                ))
+          ],
+        ),
       ),
     );
   }

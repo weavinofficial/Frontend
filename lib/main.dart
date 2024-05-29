@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/pages/chat_page.dart';
 import 'package:frontend/pages/start_page.dart';
 
 void main() {

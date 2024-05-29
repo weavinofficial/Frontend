@@ -50,6 +50,8 @@ class PostOverviewList extends StatelessWidget {
             width: 340,
             height: 280,
             child: ListView.builder(
+              padding: EdgeInsets.zero,
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: 3,
               itemBuilder: (ctx, index) =>
                   PostOverviewItem(postOverview: postOverviews[index]),

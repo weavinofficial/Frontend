@@ -11,19 +11,22 @@ class MyPage extends StatelessWidget {
     double relativeHeight = MediaQuery.of(context).size.height * (600 / 896);
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+      value: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [Color(0xffE79796), Color(0xffE79796).withOpacity(0.0)],
+            colors: [
+              const Color(0xffE79796),
+              const Color(0xffE79796).withOpacity(0.0)
+            ],
           ),
         ),
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(kToolbarHeight),
+            preferredSize: const Size.fromHeight(kToolbarHeight),
             child: AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0,
@@ -54,7 +57,7 @@ class MyPage extends StatelessWidget {
                 child: Container(
                   width: width,
                   height: relativeHeight,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Color.fromRGBO(255, 255, 255, 0.75),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(70),
@@ -64,10 +67,10 @@ class MyPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 80),
+                      const SizedBox(height: 80),
                       Container(
-                        margin: EdgeInsets.only(left: 42.0),
-                        child: Text(
+                        margin: const EdgeInsets.only(left: 42.0),
+                        child: const Text(
                           'Anonymous Kitten',
                           style: TextStyle(
                             fontSize: 24.0,
@@ -77,8 +80,8 @@ class MyPage extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(left: 42.0),
-                        child: Text(
+                        margin: const EdgeInsets.only(left: 42.0),
+                        child: const Text(
                           'Computing',
                           style: TextStyle(
                             fontFamily: 'GmarketSans',
@@ -89,11 +92,11 @@ class MyPage extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        margin:
-                            EdgeInsets.only(left: 42.0, top: 20.0, right: 42.0),
+                        margin: const EdgeInsets.only(
+                            left: 42.0, top: 20.0, right: 42.0),
                         height: 113,
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 255, 177, 132),
+                          color: const Color.fromARGB(255, 255, 177, 132),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: Row(
@@ -101,8 +104,8 @@ class MyPage extends StatelessWidget {
                             Container(
                               width: 105,
                               height: 105,
-                              margin: EdgeInsets.only(left: 5.0),
-                              decoration: BoxDecoration(
+                              margin: const EdgeInsets.only(left: 5.0),
+                              decoration: const BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(10.0),
@@ -124,7 +127,7 @@ class MyPage extends StatelessWidget {
                                     child: Container(
                                       width: 10,
                                       height: 10,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
                                         color:
                                             Color.fromARGB(255, 255, 177, 132),
@@ -137,7 +140,7 @@ class MyPage extends StatelessWidget {
                                     child: Container(
                                       width: 30,
                                       height: 30,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
                                         color:
                                             Color.fromARGB(255, 255, 177, 132),
@@ -150,7 +153,7 @@ class MyPage extends StatelessWidget {
                                     child: Container(
                                       width: 25,
                                       height: 25,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
                                         color:
                                             Color.fromARGB(255, 255, 177, 132),
@@ -163,7 +166,7 @@ class MyPage extends StatelessWidget {
                                     child: Container(
                                       width: 15,
                                       height: 15,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
                                         color:
                                             Color.fromARGB(255, 255, 177, 132),
@@ -176,7 +179,7 @@ class MyPage extends StatelessWidget {
                                     child: Container(
                                       width: 30,
                                       height: 30,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
                                         color:
                                             Color.fromARGB(255, 255, 177, 132),
@@ -186,7 +189,7 @@ class MyPage extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                                 width:
                                     10), // Add some space between the box and the text
                             Expanded(
@@ -194,7 +197,7 @@ class MyPage extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'GPA Calculator',
                                     style: TextStyle(
                                       fontSize: 16.0,
@@ -203,7 +206,7 @@ class MyPage extends StatelessWidget {
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
-                                  Text(
+                                  const Text(
                                     'Try out our GPA calculator...',
                                     style: TextStyle(
                                       fontFamily: 'GmarketSans',
@@ -214,13 +217,13 @@ class MyPage extends StatelessWidget {
                                   Align(
                                     alignment: Alignment.centerRight,
                                     child: Padding(
-                                      padding: EdgeInsets.only(
+                                      padding: const EdgeInsets.only(
                                           top: 10.0, right: 20.0),
                                       child: ElevatedButton(
                                         onPressed: () {
                                           // TODO: Link to GPA Calculator
                                         },
-                                        child: Text(
+                                        child: const Text(
                                           'Get Started',
                                           style: TextStyle(
                                             fontFamily: 'GmarketSans',
@@ -232,10 +235,10 @@ class MyPage extends StatelessWidget {
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(20),
-                                            side:
-                                                BorderSide(color: Colors.white),
+                                            side: const BorderSide(
+                                                color: Colors.white),
                                           ),
-                                          backgroundColor: Color.fromARGB(
+                                          backgroundColor: const Color.fromARGB(
                                               255, 255, 178, 132),
                                         ),
                                       ),
@@ -248,8 +251,8 @@ class MyPage extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(left: 42.0, top: 20.0),
-                        child: Text(
+                        margin: const EdgeInsets.only(left: 42.0, top: 20.0),
+                        child: const Text(
                           'Bookmarks',
                           style: TextStyle(
                             fontFamily: 'GmarketSans',
@@ -261,16 +264,16 @@ class MyPage extends StatelessWidget {
                       ),
                       Expanded(
                         child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: 42.0),
+                          margin: const EdgeInsets.symmetric(horizontal: 42.0),
                           child: ListView.separated(
                             itemCount:
                                 10, // TODO: Replace with actual list length
                             separatorBuilder: (context, index) =>
-                                Divider(color: Color(0xffE79796)),
+                                const Divider(color: Color(0xffE79796)),
                             itemBuilder: (context, index) {
                               return Container(
-                                margin: EdgeInsets.only(bottom: 10.0),
-                                padding: EdgeInsets.all(10.0),
+                                margin: const EdgeInsets.only(bottom: 10.0),
+                                padding: const EdgeInsets.all(10.0),
                                 decoration: BoxDecoration(
                                   color: Colors.transparent,
                                   borderRadius: BorderRadius.circular(10.0),
@@ -285,11 +288,12 @@ class MyPage extends StatelessWidget {
                                         Row(
                                           children: [
                                             Container(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 10.0,
-                                                  vertical: 5.0),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 10.0,
+                                                      vertical: 5.0),
                                               decoration: BoxDecoration(
-                                                color: Color(0xffE79796),
+                                                color: const Color(0xffE79796),
                                                 borderRadius:
                                                     BorderRadius.circular(20.0),
                                               ),
@@ -298,7 +302,7 @@ class MyPage extends StatelessWidget {
                                                 children: [
                                                   Text(
                                                     'Tag ${index + 1}',
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         color: Colors.white,
                                                         fontFamily:
                                                             'GmarketSans',
@@ -306,17 +310,17 @@ class MyPage extends StatelessWidget {
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   ),
-                                                  SizedBox(width: 10.0),
+                                                  const SizedBox(width: 10.0),
                                                   Image.asset(
                                                       'assets/images/tag_icon.png',
                                                       color: Colors.white),
                                                 ],
                                               ),
                                             ),
-                                            SizedBox(width: 20.0),
+                                            const SizedBox(width: 20.0),
                                             Text(
                                               'Post ${index + 1}',
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontFamily: 'GmarketSans',
                                                 fontSize: 14.0,
                                                 fontWeight: FontWeight.bold,
@@ -326,7 +330,7 @@ class MyPage extends StatelessWidget {
                                         ),
                                         Text(
                                           'Date ${index + 1}',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontFamily: 'GmarketSans',
                                             fontSize: 14.0,
                                             fontWeight: FontWeight.bold,
@@ -334,10 +338,10 @@ class MyPage extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(height: 10.0),
+                                    const SizedBox(height: 10.0),
                                     Text(
                                       'Content ${index + 1}',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 12,
                                           fontFamily: 'GmarketSans'),
                                     ),
@@ -353,11 +357,11 @@ class MyPage extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: MediaQuery.of(context).size.height - relativeHeight - 110,
+                top: MediaQuery.of(context).size.height - 1.25 * relativeHeight,
                 left: 36.0,
                 child: Stack(
                   children: [
-                    CircleAvatar(
+                    const CircleAvatar(
                       radius: 60.0,
                       backgroundColor: Colors.grey,
                     ),
@@ -367,7 +371,7 @@ class MyPage extends StatelessWidget {
                       child: Container(
                         width: 15.0,
                         height: 15.0,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.green,
                           shape: BoxShape.circle,
                         ),
@@ -380,7 +384,7 @@ class MyPage extends StatelessWidget {
                 top: MediaQuery.of(context).size.height - relativeHeight - 30,
                 right: 36.0,
                 child: IconButton(
-                  icon: Icon(Icons.edit),
+                  icon: const Icon(Icons.edit),
                   onPressed: () {
                     // Handle button tap.
                   },

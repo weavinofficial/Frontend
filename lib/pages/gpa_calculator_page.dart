@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/widgets/input_butten.dart';
+import 'package:frontend/widgets/input_button.dart';
 // import 'package:flutter/rendering.dart';
 
 //Stateful Widget class
@@ -1324,7 +1324,7 @@ class _GpaCalculatorAppState extends State<GpaCalculatorApp> {
                                                 SizedBox(
                                                     width:
                                                         constraints.maxWidth *
-                                                            22 /
+                                                            17 /
                                                             393),
                                                 Container(
                                                   padding: EdgeInsets.symmetric(
@@ -1431,7 +1431,7 @@ class _GpaCalculatorAppState extends State<GpaCalculatorApp> {
                                           //Num of A- needed(value)
                                           SizedBox(
                                               width: constraints.maxWidth *
-                                                  70 /
+                                                  65 /
                                                   393),
                                           Container(
                                             child: Column(

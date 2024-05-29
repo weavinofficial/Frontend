@@ -64,8 +64,6 @@ class _InputButtonState extends State<InputButton> {
             children: [
               const SizedBox(width: 15),
 
-
-
               //Text field for module
               Container(
                 width: 78,
@@ -118,11 +116,8 @@ class _InputButtonState extends State<InputButton> {
                         maxLength: 8,
                         maxLines: 1,
                       )),
-                  
                 ]),
               ),
-
-
 
               //Text field for grade
               const SizedBox(width: 5),
@@ -136,7 +131,6 @@ class _InputButtonState extends State<InputButton> {
                     ),
                   ),
                   child: Stack(children: [
-
                     Positioned(
                       bottom: 3,
                       left: 0,
@@ -176,15 +170,8 @@ class _InputButtonState extends State<InputButton> {
                           },
                           maxLength: 2,
                           maxLines: 1,
-                      )
-                    ),
-                    
-                  ]
-                )
-              ),
-
-
-
+                        )),
+                  ])),
 
               //Add Button
               const SizedBox(width: 30),
@@ -207,7 +194,7 @@ class _InputButtonState extends State<InputButton> {
                       'Add',
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 8,
+                        fontSize: 9,
                         fontFamily: 'Noto Sans',
                         fontWeight: FontWeight.w700,
                         height: 0,

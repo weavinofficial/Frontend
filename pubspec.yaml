@@ -75,7 +75,8 @@ flutter:
    - assets/images/Weave.png
    - assets/images/AccountCreatedBG.png
    - assets/images/upload_thread_page_image.png
-   - assets/images/share.svg
+   - assets/images/Share.png
+   
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
