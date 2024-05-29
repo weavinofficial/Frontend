@@ -3,8 +3,12 @@ import 'package:flutter/services.dart';
 // import 'package:http/http.dart' as http;
 
 class InputButton extends StatefulWidget {
+  const InputButton({super.key});
+
   @override
-  _InputButtonState createState() => _InputButtonState();
+  State<InputButton> createState() {
+    return _InputButtonState();
+  }
 }
 
 //Input Button

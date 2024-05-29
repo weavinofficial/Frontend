@@ -9,10 +9,7 @@ class ChatMessages extends StatefulWidget {
 }
 
 class _ChatMessagesState extends State<ChatMessages> {
-  final sentMessages = [
-    'Hi! I\'m just dropping a message because I want to Weave with you! ',
-    'Welcome to Weavin!'
-  ];
+  final sentMessages = ['Yummy', 'Chira go'];
 
   @override
   Widget build(BuildContext context) {

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
-class upload_thread_page extends StatefulWidget {
-  const upload_thread_page({super.key});
+class UploadThreadPage extends StatefulWidget {
+  const UploadThreadPage({super.key});
+
   @override
-  _uploadThreadPageState createState() => _uploadThreadPageState();
+  State<UploadThreadPage> createState() {
+    return _UploadThreadPageState();
+  }
 }
 
-class _uploadThreadPageState extends State<upload_thread_page> {
+class _UploadThreadPageState extends State<UploadThreadPage> {
   bool isGeneral = false;
   bool isHumor = false;
   bool isIssue = false;

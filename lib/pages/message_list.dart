@@ -1,4 +1,6 @@
 import "package:flutter/material.dart";
+import "package:frontend/pages/chat_page.dart";
+import "package:frontend/widgets/navigation_bar.dart";
 
 void _openeditor() {}
 
@@ -152,6 +154,7 @@ class MessageList extends StatelessWidget {
                         child: ListTile(
                           minVerticalPadding: 0,
                           minLeadingWidth: 0,
+                          //insert profile picture
                           leading: Container(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 0, vertical: 0),
@@ -204,7 +207,7 @@ class MessageList extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => MessageList(),
+                                builder: (context) => const ChatScreen(),
                               ),
                             );
                           },
@@ -212,7 +215,8 @@ class MessageList extends StatelessWidget {
                       );
                     },
                   ),
-                )
+                ),
+                const CustomNavigationBar(),
               ],
             ),
           );

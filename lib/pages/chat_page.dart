@@ -28,7 +28,7 @@ class _ChatScreenState extends State<ChatScreen> {
             backgroundColor: Colors.transparent,
             body: Column(children: [
               //padding at the top
-              const SizedBox(height: 40),
+              const SizedBox(height: 25),
               Row(children: [
                 //padding before back button
                 const SizedBox(width: 22),
@@ -53,7 +53,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 const SizedBox(width: 22),
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   const Text(
-                    'Anonymous Duck',
+                    'Luke Shim',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
