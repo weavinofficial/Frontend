@@ -59,8 +59,9 @@ class _PostLikePage extends State<PostLikePage> {
               const SizedBox(height: 62),
               Row(
                 children: [
-                  Image.asset('assets/images/community.png',
-                      width: 503.5, height: 181)
+                  Expanded(
+                    child: Image.asset('assets/images/community.png'),
+                  )
                 ],
               ),
               const SizedBox(height: 58),
@@ -261,7 +262,7 @@ class _PostLikePage extends State<PostLikePage> {
                         children: [
                           SizedBox(width: 5),
                           Text(
-                            'Rate my drawing!',
+                            'Rate my drawing! /n /n \n \n \n fefeegwg',
                             style: TextStyle(
                               color: Color(0xFF727272),
                               fontSize: 12,

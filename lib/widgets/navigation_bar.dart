@@ -90,7 +90,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                       height: 65,
                       width: 65,
                       decoration: const BoxDecoration(
-                          color: Colors.white, shape: BoxShape.circle),
+                          color: Colors.transparent, shape: BoxShape.circle),
                     ),
                   ),
                 ]),
@@ -99,7 +99,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
           ),
           Positioned(
             left: 148,
-            top: 6,
+            top: 20,
             child: FloatingActionButton(
               backgroundColor: bottonNavBgColor.withOpacity(0.8),
               shape: RoundedRectangleBorder(

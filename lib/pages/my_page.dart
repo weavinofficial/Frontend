@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:frontend/pages/gpa_calculator_page.dart';
 
 class MyPage extends StatelessWidget {
   const MyPage({Key? key}) : super(key: key);
@@ -221,7 +222,13 @@ class MyPage extends StatelessWidget {
                                           top: 10.0, right: 20.0),
                                       child: ElevatedButton(
                                         onPressed: () {
-                                          // TODO: Link to GPA Calculator
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const GpaCalculatorApp(),
+                                            ),
+                                          );
                                         },
                                         child: const Text(
                                           'Get Started',

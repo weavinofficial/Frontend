@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/pages/gpa_calculator_page.dart';
+import 'package:frontend/pages/home_page.dart';
+import 'package:frontend/pages/post_like_page.dart';
 import 'package:frontend/pages/start_page.dart';
 
 void main() {
@@ -12,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       home: Scaffold(
-        body: StartPage(),
+        body: PostLikePage(),
       ),
     );
   }

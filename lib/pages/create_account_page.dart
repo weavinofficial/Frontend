@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/pages/choose_faculty_page.dart';
+import 'package:http/http.dart' as http;
 
 class CreateAccountPage extends StatefulWidget {
   const CreateAccountPage({super.key});
