@@ -3,8 +3,6 @@ import "package:frontend/pages/chat_page.dart";
 import "package:frontend/widgets/navigation_bar.dart";
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-void _openeditor() {}
-
 class ChatRoom {
   final String name;
   final String lastMessage;
@@ -18,9 +16,14 @@ class ChatRoom {
       this.isNewMessage = false});
 }
 
-class MessageList extends StatelessWidget {
+class MessageList extends StatefulWidget {
   MessageList({super.key});
 
+  @override
+  State<MessageList> createState() => _MessageListState();
+}
+
+class _MessageListState extends State<MessageList> {
   final List<ChatRoom> chatRooms = [
     ChatRoom(
       name: 'Luke',
@@ -32,10 +35,45 @@ class MessageList extends StatelessWidget {
       name: 'Erica',
       lastMessage: 'ㅋㅎㅋㅎㅋㅎㅋㅎㅋㅎㅋㅎㅋㅎㅋ',
       timestamp: '09:15 AM',
+      isNewMessage: false,
     ),
-    ChatRoom(name: 'dummy', lastMessage: 'dummy', timestamp: '08:45 AM'),
+    ChatRoom(
+      name: 'dummy',
+      lastMessage: 'dummy',
+      timestamp: '08:45 AM',
+      isNewMessage: false,
+    ),
     // TODO: Connect with backend
   ];
+
+  void _deleteChatRoom(int index) {
+    final chatroom = chatRooms[index];
+    setState(() {
+      chatRooms.removeAt(index);
+    });
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: const Duration(seconds: 3),
+        content: const Text('Left chatroom'),
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {
+            setState(() {
+              chatRooms.insert(index, chatroom);
+            });
+          },
+        ),
+      ),
+    );
+  }
+
+  void _pinChatRoom(int index) {
+    setState(() {
+      final pinnedChatRoom = chatRooms.removeAt(index);
+      chatRooms.insert(0, pinnedChatRoom);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,38 +93,7 @@ class MessageList extends StatelessWidget {
             ),
             child: Column(
               children: [
-                const SizedBox(height: 7),
-                //Edit button
-                Row(
-                  children: [
-                    const SizedBox(width: 7),
-                    SizedBox(
-                      width: 30,
-                      height: 25,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                            elevation: 0,
-                            shadowColor: Colors.transparent,
-                            shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.zero),
-                            padding: const EdgeInsets.all(0),
-                            splashFactory: NoSplash.splashFactory),
-                        onPressed: _openeditor,
-                        child: const Text(
-                          'Edit',
-                          style: TextStyle(
-                            color: Color(0xFF727272),
-                            fontSize: 10,
-                            fontFamily: 'Noto Sans',
-                            fontWeight: FontWeight.w600,
-                            height: 0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-
+                const SizedBox(height: 32),
                 //Weave' image
                 SizedBox(
                   width: constraints.maxWidth,
@@ -150,23 +157,36 @@ class MessageList extends StatelessWidget {
                     itemCount: chatRooms.length,
                     itemBuilder: (context, index) {
                       return Slidable(
+                        actionExtentRatio: 0.2,
                         actionPane: const SlidableDrawerActionPane(),
                         secondaryActions: <Widget>[
                           IconSlideAction(
                             caption: 'Leave',
-                            color: Colors.red,
+                            color: const Color.fromARGB(255, 255, 89, 77),
                             icon: Icons.exit_to_app,
                             onTap: () {
                               // Handle leave chatroom action
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('left chatroom')),
-                              );
+                              _deleteChatRoom(index);
                             },
                           ),
+                          IconSlideAction(
+                            caption: 'Pin',
+                            foregroundColor: Colors.white,
+                            color: const Color.fromARGB(255, 83, 173, 247),
+                            icon: Icons.push_pin,
+                            onTap: () {
+                              // Handle share action
+                              _pinChatRoom(index);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('pinned to the top')),
+                              );
+                            },
+                          )
                         ],
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 18, vertical: 0),
+                              horizontal: 18, vertical: 2),
                           child: ListTile(
                             minVerticalPadding: 0,
                             minLeadingWidth: 0,
