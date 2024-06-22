@@ -9,7 +9,7 @@ class ChatMessages extends StatefulWidget {
 }
 
 class _ChatMessagesState extends State<ChatMessages> {
-  final sentMessages = ['Yummy', 'Chira go'];
+  final sentMessages = ['Yummy', 'Chira go', 'eijieojgwog'];
 
   @override
   Widget build(BuildContext context) {
