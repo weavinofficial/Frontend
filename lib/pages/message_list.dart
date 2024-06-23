@@ -73,6 +73,11 @@ class _MessageListState extends State<MessageList> {
       final pinnedChatRoom = chatRooms.removeAt(index);
       chatRooms.insert(0, pinnedChatRoom);
     });
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+          duration: Duration(seconds: 3), content: Text('pinned to the top')),
+    );
   }
 
   @override
@@ -177,76 +182,82 @@ class _MessageListState extends State<MessageList> {
                             onTap: () {
                               // Handle share action
                               _pinChatRoom(index);
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('pinned to the top')),
-                              );
                             },
                           )
                         ],
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 18, vertical: 2),
-                          child: ListTile(
-                            minVerticalPadding: 0,
-                            minLeadingWidth: 0,
-                            //insert profile picture
-                            leading: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 0, vertical: 0),
-                              width: 45,
-                              height: 45,
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 0, vertical: 0),
-                            title: Text(
-                              chatRooms[index].name,
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontFamily: 'Noto Sans',
-                                color: const Color.fromARGB(255, 49, 49, 49),
-                                fontWeight: chatRooms[index].isNewMessage
-                                    ? FontWeight.w700
-                                    : FontWeight.w500,
-                                height: 1.5,
-                              ),
-                            ),
-                            subtitle: Text(
-                              chatRooms[index].lastMessage,
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: chatRooms[index].isNewMessage
-                                    ? const Color.fromARGB(255, 49, 49, 49)
-                                    : const Color.fromARGB(255, 94, 94, 94),
-                                fontFamily: 'Noto Sans',
-                                fontWeight: chatRooms[index].isNewMessage
-                                    ? FontWeight.w700
-                                    : FontWeight.w500,
-                                height: 0,
-                              ),
-                            ),
-                            trailing: Text(
-                              chatRooms[index].timestamp,
-                              style: const TextStyle(
-                                fontSize: 10,
-                                color: Color.fromARGB(255, 94, 94, 94),
-                                fontFamily: 'Noto Sans',
-                                fontWeight: FontWeight.w500,
-                                height: 0,
-                              ),
-                            ),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const ChatScreen(),
+                              horizontal: 0, vertical: 0.5),
+                          child: Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const ChatScreen(),
+                                  ),
+                                );
+                              },
+                              splashColor: Colors.white
+                                  .withAlpha(30), // Customize the splash color
+                              highlightColor: Colors.grey.withAlpha(
+                                  15), // Customize the highlight color
+                              child: ListTile(
+                                minVerticalPadding: 0,
+                                minLeadingWidth: 0,
+                                //insert profile picture
+                                leading: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 0, vertical: 0),
+                                  width: 45,
+                                  height: 45,
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.grey,
+                                  ),
                                 ),
-                              );
-                            },
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 18, vertical: 0),
+                                title: Text(
+                                  chatRooms[index].name,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontFamily: 'Noto Sans',
+                                    color:
+                                        const Color.fromARGB(255, 49, 49, 49),
+                                    fontWeight: chatRooms[index].isNewMessage
+                                        ? FontWeight.w700
+                                        : FontWeight.w500,
+                                    height: 1.5,
+                                  ),
+                                ),
+                                subtitle: Text(
+                                  chatRooms[index].lastMessage,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: chatRooms[index].isNewMessage
+                                        ? const Color.fromARGB(255, 49, 49, 49)
+                                        : const Color.fromARGB(255, 94, 94, 94),
+                                    fontFamily: 'Noto Sans',
+                                    fontWeight: chatRooms[index].isNewMessage
+                                        ? FontWeight.w700
+                                        : FontWeight.w500,
+                                    height: 0,
+                                  ),
+                                ),
+                                trailing: Text(
+                                  chatRooms[index].timestamp,
+                                  style: const TextStyle(
+                                    fontSize: 10,
+                                    color: Color.fromARGB(255, 94, 94, 94),
+                                    fontFamily: 'Noto Sans',
+                                    fontWeight: FontWeight.w500,
+                                    height: 0,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       );
