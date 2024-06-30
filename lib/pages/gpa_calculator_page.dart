@@ -17,7 +17,7 @@ class _GpaCalculatorAppState extends State<GpaCalculatorApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Apply the background gradient directly to this Scaffold
+      // Apply the background gradie nt directly to this Scaffold
 
       body: LayoutBuilder(
         builder: (context, constraints) {

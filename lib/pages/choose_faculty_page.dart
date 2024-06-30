@@ -5,6 +5,7 @@ import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 //CustomClipper. Go to https://shapemaker.web.app/ to create a custom waveform
 class WaveClipper extends CustomClipper<Path> {
+
   @override
   Path getClip(Size size) {
     debugPrint(size.width.toString());
@@ -31,6 +32,7 @@ class SnappingList extends StatefulWidget {
   final double maxWidth;
 
   const SnappingList(this.maxHeight, this.maxWidth, {super.key});
+
 
   @override
   State<SnappingList> createState() => _SnappingListState();

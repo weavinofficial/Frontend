@@ -178,9 +178,9 @@ class _InputButtonState extends State<InputButton> {
                   ])),
 
               //Add Button
-              const SizedBox(width: 30),
+              const SizedBox(width: 25),
               Container(
-                width: 25,
+                width: 30,
                 height: 21,
                 padding: const EdgeInsets.all(5),
                 decoration: ShapeDecoration(
