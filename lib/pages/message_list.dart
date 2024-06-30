@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
-
-void _openeditor() {}
+import "package:frontend/pages/chat_page.dart";
+import "package:frontend/widgets/navigation_bar.dart";
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class ChatRoom {
   final String name;
@@ -15,9 +16,14 @@ class ChatRoom {
       this.isNewMessage = false});
 }
 
-class MessageList extends StatelessWidget {
+class MessageList extends StatefulWidget {
   MessageList({super.key});
 
+  @override
+  State<MessageList> createState() => _MessageListState();
+}
+
+class _MessageListState extends State<MessageList> {
   final List<ChatRoom> chatRooms = [
     ChatRoom(
       name: 'Luke',
@@ -29,10 +35,50 @@ class MessageList extends StatelessWidget {
       name: 'Erica',
       lastMessage: 'ㅋㅎㅋㅎㅋㅎㅋㅎㅋㅎㅋㅎㅋㅎㅋ',
       timestamp: '09:15 AM',
+      isNewMessage: false,
     ),
-    ChatRoom(name: 'dummy', lastMessage: 'dummy', timestamp: '08:45 AM'),
+    ChatRoom(
+      name: 'dummy',
+      lastMessage: 'dummy',
+      timestamp: '08:45 AM',
+      isNewMessage: false,
+    ),
     // TODO: Connect with backend
   ];
+
+  void _deleteChatRoom(int index) {
+    final chatroom = chatRooms[index];
+    setState(() {
+      chatRooms.removeAt(index);
+    });
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: const Duration(seconds: 3),
+        content: const Text('Left chatroom'),
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {
+            setState(() {
+              chatRooms.insert(index, chatroom);
+            });
+          },
+        ),
+      ),
+    );
+  }
+
+  void _pinChatRoom(int index) {
+    setState(() {
+      final pinnedChatRoom = chatRooms.removeAt(index);
+      chatRooms.insert(0, pinnedChatRoom);
+    });
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+          duration: Duration(seconds: 3), content: Text('pinned to the top')),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,38 +98,7 @@ class MessageList extends StatelessWidget {
             ),
             child: Column(
               children: [
-                const SizedBox(height: 7),
-                //Edit button
-                Row(
-                  children: [
-                    const SizedBox(width: 7),
-                    SizedBox(
-                      width: 30,
-                      height: 25,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                            elevation: 0,
-                            shadowColor: Colors.transparent,
-                            shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.zero),
-                            padding: const EdgeInsets.all(0),
-                            splashFactory: NoSplash.splashFactory),
-                        onPressed: _openeditor,
-                        child: const Text(
-                          'Edit',
-                          style: TextStyle(
-                            color: Color(0xFF727272),
-                            fontSize: 10,
-                            fontFamily: 'Noto Sans',
-                            fontWeight: FontWeight.w600,
-                            height: 0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-
+                const SizedBox(height: 32),
                 //Weave' image
                 SizedBox(
                   width: constraints.maxWidth,
@@ -146,73 +161,110 @@ class MessageList extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: chatRooms.length,
                     itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 18, vertical: 0),
-                        child: ListTile(
-                          minVerticalPadding: 0,
-                          minLeadingWidth: 0,
-                          leading: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 0, vertical: 0),
-                            width: 45,
-                            height: 45,
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.grey,
-                            ),
+                      return Slidable(
+                        actionExtentRatio: 0.2,
+                        actionPane: const SlidableDrawerActionPane(),
+                        secondaryActions: <Widget>[
+                          IconSlideAction(
+                            caption: 'Leave',
+                            color: const Color.fromARGB(255, 255, 89, 77),
+                            icon: Icons.exit_to_app,
+                            onTap: () {
+                              // Handle leave chatroom action
+                              _deleteChatRoom(index);
+                            },
                           ),
-                          contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 0, vertical: 0),
-                          title: Text(
-                            chatRooms[index].name,
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontFamily: 'Noto Sans',
-                              color: const Color.fromARGB(255, 49, 49, 49),
-                              fontWeight: chatRooms[index].isNewMessage
-                                  ? FontWeight.w700
-                                  : FontWeight.w500,
-                              height: 1.5,
-                            ),
-                          ),
-                          subtitle: Text(
-                            chatRooms[index].lastMessage,
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: chatRooms[index].isNewMessage
-                                  ? const Color.fromARGB(255, 49, 49, 49)
-                                  : const Color.fromARGB(255, 94, 94, 94),
-                              fontFamily: 'Noto Sans',
-                              fontWeight: chatRooms[index].isNewMessage
-                                  ? FontWeight.w700
-                                  : FontWeight.w500,
-                              height: 0,
-                            ),
-                          ),
-                          trailing: Text(
-                            chatRooms[index].timestamp,
-                            style: const TextStyle(
-                              fontSize: 10,
-                              color: Color.fromARGB(255, 94, 94, 94),
-                              fontFamily: 'Noto Sans',
-                              fontWeight: FontWeight.w500,
-                              height: 0,
-                            ),
-                          ),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => MessageList(),
+                          IconSlideAction(
+                            caption: 'Pin',
+                            foregroundColor: Colors.white,
+                            color: const Color.fromARGB(255, 83, 173, 247),
+                            icon: Icons.push_pin,
+                            onTap: () {
+                              // Handle share action
+                              _pinChatRoom(index);
+                            },
+                          )
+                        ],
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 0, vertical: 0.5),
+                          child: Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const ChatScreen(),
+                                  ),
+                                );
+                              },
+                              splashColor: Colors.white
+                                  .withAlpha(30), // Customize the splash color
+                              highlightColor: Colors.grey.withAlpha(
+                                  15), // Customize the highlight color
+                              child: ListTile(
+                                minVerticalPadding: 0,
+                                minLeadingWidth: 0,
+                                //insert profile picture
+                                leading: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 0, vertical: 0),
+                                  width: 45,
+                                  height: 45,
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 18, vertical: 0),
+                                title: Text(
+                                  chatRooms[index].name,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontFamily: 'Noto Sans',
+                                    color:
+                                        const Color.fromARGB(255, 49, 49, 49),
+                                    fontWeight: chatRooms[index].isNewMessage
+                                        ? FontWeight.w700
+                                        : FontWeight.w500,
+                                    height: 1.5,
+                                  ),
+                                ),
+                                subtitle: Text(
+                                  chatRooms[index].lastMessage,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: chatRooms[index].isNewMessage
+                                        ? const Color.fromARGB(255, 49, 49, 49)
+                                        : const Color.fromARGB(255, 94, 94, 94),
+                                    fontFamily: 'Noto Sans',
+                                    fontWeight: chatRooms[index].isNewMessage
+                                        ? FontWeight.w700
+                                        : FontWeight.w500,
+                                    height: 0,
+                                  ),
+                                ),
+                                trailing: Text(
+                                  chatRooms[index].timestamp,
+                                  style: const TextStyle(
+                                    fontSize: 10,
+                                    color: Color.fromARGB(255, 94, 94, 94),
+                                    fontFamily: 'Noto Sans',
+                                    fontWeight: FontWeight.w500,
+                                    height: 0,
+                                  ),
+                                ),
                               ),
-                            );
-                          },
+                            ),
+                          ),
                         ),
                       );
                     },
                   ),
-                )
+                ),
+                const CustomNavigationBar(),
               ],
             ),
           );

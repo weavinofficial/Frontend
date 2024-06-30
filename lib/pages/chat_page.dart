@@ -28,7 +28,7 @@ class _ChatScreenState extends State<ChatScreen> {
             backgroundColor: Colors.transparent,
             body: Column(children: [
               //padding at the top
-              const SizedBox(height: 16),
+              const SizedBox(height: 25),
               Row(children: [
                 //padding before back button
                 const SizedBox(width: 22),
@@ -53,7 +53,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 const SizedBox(width: 22),
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   const Text(
-                    'Anonymous Duck',
+                    'Luke Shim',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -88,6 +88,19 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   child: const Column(
                     children: [
+                      SizedBox(height: 13),
+                      Text(
+                        'Today',
+                        style: TextStyle(
+                          color: Color(0xFF727272),
+                          fontSize: 14,
+                          fontFamily: 'Noto Sans',
+                          fontWeight: FontWeight.w500,
+                          height: 0,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 35),
                       Expanded(child: ChatMessages()),
                       NewMessage(),
                     ],

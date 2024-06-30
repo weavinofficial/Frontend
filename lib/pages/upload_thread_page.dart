@@ -1,12 +1,18 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-class upload_thread_page extends StatefulWidget {
-  const upload_thread_page({super.key});
+import 'package:flutter/material.dart';
+import 'package:myapp/photo_button.dart';
+
+class UploadThreadPage extends StatefulWidget {
+  const UploadThreadPage({super.key});
+
   @override
-  _uploadThreadPageState createState() => _uploadThreadPageState();
+  State<UploadThreadPage> createState() {
+    return _UploadThreadPageState();
+  }
 }
 
-class _uploadThreadPageState extends State<upload_thread_page> {
+class _UploadThreadPageState extends State<UploadThreadPage> {
   bool isGeneral = false;
   bool isHumor = false;
   bool isIssue = false;
@@ -21,14 +27,38 @@ class _uploadThreadPageState extends State<upload_thread_page> {
   bool isParmacy = false;
   bool isLaw = false;
   bool isOthers = false;
-
+  // bool _showPhotoButton = false;
   bool isChecked = false;
+  // void _togglePhotoButton() {
+  //   setState(() {
+  //     _showPhotoButton = !_showPhotoButton;
+  //   });
+  // }
+
+  File? _imageFile;
+
+  void _showPhotoPicker() async {
+    final pickedFile = await showModalBottomSheet<File>(
+      context: context,
+      builder: (BuildContext context) {
+        return PhotoPicker();
+      },
+    );
+
+    if (pickedFile != null) {
+      setState(() {
+        _imageFile = pickedFile;
+      });
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: LayoutBuilder(builder: (context, constraints) {
       return Stack(
         children: [
+          
           Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
@@ -804,7 +834,7 @@ class _uploadThreadPageState extends State<upload_thread_page> {
                             children: [
                               SizedBox(
                                 width: 297,
-                                height: 190,
+                                height: 250,
                                 child: Stack(
                                   children: [
                                     Positioned(
@@ -812,7 +842,7 @@ class _uploadThreadPageState extends State<upload_thread_page> {
                                       top: 0,
                                       child: Container(
                                         width: 297,
-                                        height: 190,
+                                        height: 250,
                                         decoration: ShapeDecoration(
                                           color: Colors.white.withOpacity(0.75),
                                           shape: RoundedRectangleBorder(
@@ -974,57 +1004,20 @@ class _uploadThreadPageState extends State<upload_thread_page> {
                                 SizedBox(
                                     width: 25,
                                     child: ElevatedButton(
-                                      onPressed: () {
-                                        // Handle button press
-                                      },
+                                      onPressed: _showPhotoPicker,
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: Colors.transparent,
                                         shadowColor: Colors.transparent,
                                         padding: EdgeInsets.zero,
                                       ),
                                       child: SizedBox(
-                                        width: 16,
-                                        height: 16,
-                                        child: Stack(
-                                          children: [
-                                            Positioned(
-                                              left: 0,
-                                              top: 0,
-                                              child: Container(
-                                                width: 16,
-                                                height: 16,
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    width: 1.50,
-                                                    color: Colors.white,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                ),
-                                              ),
-                                            ),
-                                            Positioned(
-                                              left: 6.40,
-                                              top: 3.20,
-                                              child: Transform.rotate(
-                                                angle: 3.14,
-                                                child: Container(
-                                                  width: 3.20,
-                                                  height: 3.20,
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                      width: 1.50,
-                                                      color: Colors.white,
-                                                    ),
-                                                    shape: BoxShape.circle,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
+                                        child: Icon(
+                                          Icons.photo, // You can replace this with the desired video upload icon
+                                          color: Colors.white,
+                                        ), 
                                       ),
-                                    )),
+                                      ),
+                                    ),
 
                                 const SizedBox(width: 10),
 
@@ -1079,12 +1072,12 @@ class _uploadThreadPageState extends State<upload_thread_page> {
 
                             //Text field for body of the post
                             const SizedBox(
-                              height: 90,
+                              height: 160,
                               width: 240,
                               child: TextField(
                                 style: TextStyle(
                                   color: Color(0xFF727272),
-                                  fontSize: 12,
+                                  fontSize: 15,
                                   fontFamily: 'Noto Sans',
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -1097,7 +1090,7 @@ class _uploadThreadPageState extends State<upload_thread_page> {
                                   hintText: 'Type',
                                   hintStyle: TextStyle(
                                     color: Color(0xFF727272),
-                                    fontSize: 12,
+                                    fontSize: 15,
                                     fontFamily: 'Noto Sans',
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -1105,16 +1098,16 @@ class _uploadThreadPageState extends State<upload_thread_page> {
                                 ),
                               ),
                             ),
-
+                            SizedBox(height: 10),
                             //anonymous checkbox
                             Row(
                               children: [
-                                const SizedBox(width: 200),
+                                const SizedBox(width: 160),
                                 const Text(
                                   'Anonymous?',
                                   style: TextStyle(
                                     color: Color(0xFF727272),
-                                    fontSize: 12,
+                                    fontSize: 15,
                                     fontFamily: 'Noto Sans',
                                     fontWeight: FontWeight.w600,
                                     height: 0,
@@ -1155,7 +1148,6 @@ class _uploadThreadPageState extends State<upload_thread_page> {
                     ),
                   ),
 
-
                   //Post button
                   TextButton(
                     onPressed: () {
@@ -1182,7 +1174,16 @@ class _uploadThreadPageState extends State<upload_thread_page> {
                     ),
                   )
                 ],
-              ))
+              )),
+        
+        
+
+        // if (_showPhotoButton) 
+        //     Positioned.fill(
+        //       child:PhotoPicker(
+
+        //       ),
+        //     )
         ],
       );
     }));

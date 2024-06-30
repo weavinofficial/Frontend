@@ -10,6 +10,17 @@ class NewMessage extends StatefulWidget {
 }
 
 class _NewMessageState extends State<NewMessage> {
+  void _showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 260,
+        );
+      },
+    );
+  }
+
   final _messageController = TextEditingController();
 
   @override
@@ -33,22 +44,44 @@ class _NewMessageState extends State<NewMessage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: ShapeDecoration(shape: CircleBorder()),
-      child: Padding(
-        padding: const EdgeInsets.only(left: 15, right: 1, bottom: 14),
+      height: 50,
+      margin: const EdgeInsets.symmetric(horizontal: 1),
+      decoration: ShapeDecoration(
+        color: const Color(0xFFE9EAEE),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(35),
+        ),
+      ),
+      child: Container(
+        padding: const EdgeInsets.only(left: 8, right: 1, bottom: 0),
         child: Row(children: [
           Expanded(
             child: TextField(
+              style: const TextStyle(fontSize: 15),
               controller: _messageController,
-              decoration: const InputDecoration(labelText: 'Send a message'),
+              decoration: InputDecoration(
+                prefixIcon: IconButton(
+                  onPressed: () => _showBottomSheet(context),
+                  icon: const Icon(Icons.add),
+                ),
+                prefixIconColor: const Color.fromRGBO(255, 201, 139, 1),
+                labelText: 'Send a message',
+                labelStyle: const TextStyle(fontSize: 15),
+                border: InputBorder.none,
+              ),
               textCapitalization: TextCapitalization.none,
             ),
           ),
-          IconButton(
-            icon: const Icon(Icons.send),
-            //icon: Image.asset('assets/images/share.svg'),
-            onPressed: _submitMessage,
+          SizedBox(
+            width: 45,
+            height: 45,
+            child: IconButton(
+              padding: const EdgeInsets.all(11),
+              icon: Image.asset('assets/images/Share.png'),
+              onPressed: _submitMessage,
+            ),
           ),
+          const SizedBox(width: 14),
         ]),
       ),
     );
