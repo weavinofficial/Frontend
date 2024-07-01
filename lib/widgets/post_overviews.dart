@@ -17,6 +17,7 @@ class PostOverviews extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
+            const SizedBox(height: 100),
             PostOverviewList(
                 postOverviews: trendingPostOverviews,
                 postOverviewListType: PostOverviewListType.trending),

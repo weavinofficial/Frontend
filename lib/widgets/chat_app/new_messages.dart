@@ -1,4 +1,7 @@
+import 'package:advanced_media_picker/advanced_media_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/widgets/advanced_media_picker.dart';
+import 'dart:io';
 
 class NewMessage extends StatefulWidget {
   const NewMessage({super.key});
@@ -10,12 +13,21 @@ class NewMessage extends StatefulWidget {
 }
 
 class _NewMessageState extends State<NewMessage> {
-  void _showBottomSheet(BuildContext context) {
-    showModalBottomSheet(
+  File? _imageFile;
+  List<XFile> _selectedFiles = [];
+
+  void _onFilesPicked(List<XFile> files) {
+    setState(() {
+      _selectedFiles = files;
+    });
+  }
+
+  void _openPhotoPicker(BuildContext context) {
+    showDialog(
       context: context,
       builder: (BuildContext context) {
-        return Container(
-          height: 260,
+        return AlertDialog(
+          content: PhotoPickerWidget(onFilesPicked: _onFilesPicked),
         );
       },
     );
@@ -31,13 +43,10 @@ class _NewMessageState extends State<NewMessage> {
 
   void _submitMessage() {
     final enteredMessage = _messageController.text;
-
     if (enteredMessage.trim().isEmpty) {
       return;
     }
-
     //send to backend
-
     _messageController.clear();
   }
 
@@ -53,21 +62,23 @@ class _NewMessageState extends State<NewMessage> {
         ),
       ),
       child: Container(
-        padding: const EdgeInsets.only(left: 8, right: 1, bottom: 0),
+        padding: const EdgeInsets.only(left: 8, right: 1, bottom: 0, top: 0),
         child: Row(children: [
           Expanded(
-            child: TextField(
-              style: const TextStyle(fontSize: 15),
+            child: TextFormField(
+              style: const TextStyle(fontSize: 16),
               controller: _messageController,
+              textAlignVertical: TextAlignVertical.center,
               decoration: InputDecoration(
+                contentPadding: const EdgeInsets.only(bottom: 18),
+                floatingLabelBehavior: FloatingLabelBehavior.never,
                 prefixIcon: IconButton(
-                  onPressed: () => _showBottomSheet(context),
+                  onPressed: () => _openPhotoPicker(context),
                   icon: const Icon(Icons.add),
                 ),
                 prefixIconColor: const Color.fromRGBO(255, 201, 139, 1),
                 labelText: 'Send a message',
-                labelStyle: const TextStyle(fontSize: 15),
-                border: InputBorder.none,
+                labelStyle: const TextStyle(fontSize: 15, height: 0),
               ),
               textCapitalization: TextCapitalization.none,
             ),

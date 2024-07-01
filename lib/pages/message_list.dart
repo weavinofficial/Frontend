@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 import "package:frontend/pages/chat_page.dart";
 import "package:frontend/widgets/navigation_bar.dart";
-import 'package:flutter_slidable/flutter_slidable.dart';
 
 class ChatRoom {
   final String name;
@@ -88,11 +87,11 @@ class _MessageListState extends State<MessageList> {
           return Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
                 colors: [
-                  Color.fromARGB(255, 231, 151, 150),
-                  Color.fromARGB(255, 245, 206, 199),
+                  Color(0xFFE79796),
+                  Color(0xFFF5CEC7),
                 ],
               ),
             ),
@@ -113,8 +112,8 @@ class _MessageListState extends State<MessageList> {
 
                 //Searchbar
                 Container(
-                  width: 120,
-                  height: 25,
+                  width: 150,
+                  height: 29,
                   decoration: ShapeDecoration(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(13),
@@ -146,7 +145,7 @@ class _MessageListState extends State<MessageList> {
                       hintText: 'Search',
                       hintStyle: const TextStyle(
                         color: Colors.white,
-                        fontSize: 14,
+                        fontSize: 13,
                         fontFamily: 'Noto Sans',
                         fontWeight: FontWeight.w500,
                       ),
@@ -161,100 +160,115 @@ class _MessageListState extends State<MessageList> {
                   child: ListView.builder(
                     itemCount: chatRooms.length,
                     itemBuilder: (context, index) {
-                      return Slidable(
-                        actionExtentRatio: 0.2,
-                        actionPane: const SlidableDrawerActionPane(),
-                        secondaryActions: <Widget>[
-                          IconSlideAction(
-                            caption: 'Leave',
-                            color: const Color.fromARGB(255, 255, 89, 77),
-                            icon: Icons.exit_to_app,
-                            onTap: () {
-                              // Handle leave chatroom action
-                              _deleteChatRoom(index);
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 0, vertical: 0.5),
+                        child: Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            onLongPress: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Dialog(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(4)),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 16,
+                                              right: 16,
+                                              bottom: 0,
+                                              top: 16),
+                                          child: Text(
+                                            chatRooms[index].name,
+                                            style: const TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        ListTile(
+                                          title: Text('Pin to top'),
+                                          onTap: () {
+                                            _pinChatRoom(index);
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                        ListTile(
+                                          title: Text('Leave chatroom'),
+                                          onTap: () {
+                                            _deleteChatRoom(index);
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              );
                             },
-                          ),
-                          IconSlideAction(
-                            caption: 'Pin',
-                            foregroundColor: Colors.white,
-                            color: const Color.fromARGB(255, 83, 173, 247),
-                            icon: Icons.push_pin,
                             onTap: () {
-                              // Handle share action
-                              _pinChatRoom(index);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const ChatScreen(),
+                                ),
+                              );
                             },
-                          )
-                        ],
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 0, vertical: 0.5),
-                          child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const ChatScreen(),
-                                  ),
-                                );
-                              },
-                              splashColor: Colors.white
-                                  .withAlpha(30), // Customize the splash color
-                              highlightColor: Colors.grey.withAlpha(
-                                  15), // Customize the highlight color
-                              child: ListTile(
-                                minVerticalPadding: 0,
-                                minLeadingWidth: 0,
-                                //insert profile picture
-                                leading: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 0, vertical: 0),
-                                  width: 45,
-                                  height: 45,
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.grey,
-                                  ),
+                            splashColor: Colors.white
+                                .withAlpha(30), // Customize the splash color
+                            highlightColor: Colors.grey
+                                .withAlpha(15), // Customize the highlight color
+                            child: ListTile(
+                              minVerticalPadding: 0,
+                              minLeadingWidth: 0,
+                              //insert profile picture
+                              leading: Container(
+                                width: 55,
+                                height: 55,
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Color.fromARGB(255, 193, 184, 184),
                                 ),
-                                contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 18, vertical: 0),
-                                title: Text(
-                                  chatRooms[index].name,
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: 'Noto Sans',
-                                    color:
-                                        const Color.fromARGB(255, 49, 49, 49),
-                                    fontWeight: chatRooms[index].isNewMessage
-                                        ? FontWeight.w700
-                                        : FontWeight.w500,
-                                    height: 1.5,
-                                  ),
+                              ),
+                              contentPadding: const EdgeInsets.only(
+                                  left: 18, right: 25, top: 0, bottom: 0),
+                              title: Text(
+                                chatRooms[index].name,
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontFamily: 'Noto Sans',
+                                  color: const Color.fromARGB(255, 49, 49, 49),
+                                  fontWeight: chatRooms[index].isNewMessage
+                                      ? FontWeight.w700
+                                      : FontWeight.w500,
+                                  height: 1.5,
                                 ),
-                                subtitle: Text(
-                                  chatRooms[index].lastMessage,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: chatRooms[index].isNewMessage
-                                        ? const Color.fromARGB(255, 49, 49, 49)
-                                        : const Color.fromARGB(255, 94, 94, 94),
-                                    fontFamily: 'Noto Sans',
-                                    fontWeight: chatRooms[index].isNewMessage
-                                        ? FontWeight.w700
-                                        : FontWeight.w500,
-                                    height: 0,
-                                  ),
+                              ),
+                              subtitle: Text(
+                                chatRooms[index].lastMessage,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: chatRooms[index].isNewMessage
+                                      ? const Color.fromARGB(255, 49, 49, 49)
+                                      : const Color.fromARGB(255, 94, 94, 94),
+                                  fontFamily: 'Noto Sans',
+                                  fontWeight: chatRooms[index].isNewMessage
+                                      ? FontWeight.w700
+                                      : FontWeight.w500,
+                                  height: 0,
                                 ),
-                                trailing: Text(
-                                  chatRooms[index].timestamp,
-                                  style: const TextStyle(
-                                    fontSize: 10,
-                                    color: Color.fromARGB(255, 94, 94, 94),
-                                    fontFamily: 'Noto Sans',
-                                    fontWeight: FontWeight.w500,
-                                    height: 0,
-                                  ),
+                              ),
+                              trailing: Text(
+                                chatRooms[index].timestamp,
+                                style: const TextStyle(
+                                  fontSize: 10,
+                                  color: Color.fromARGB(255, 94, 94, 94),
+                                  fontFamily: 'Noto Sans',
+                                  fontWeight: FontWeight.w500,
+                                  height: 0,
                                 ),
                               ),
                             ),

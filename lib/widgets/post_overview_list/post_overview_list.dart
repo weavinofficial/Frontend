@@ -40,7 +40,7 @@ class PostOverviewList extends StatelessWidget {
                       'More',
                       style: TextStyle(
                         fontSize: 12,
-                        color: Color.fromRGBO(151, 151, 151, 1),
+                        color: Color.fromRGBO(190, 184, 184, 1),
                       ),
                     ))
               ],
@@ -52,7 +52,7 @@ class PostOverviewList extends StatelessWidget {
             child: ListView.builder(
               padding: EdgeInsets.zero,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: 3,
+              itemCount: 4,
               itemBuilder: (ctx, index) =>
                   PostOverviewItem(postOverview: postOverviews[index]),
             ),

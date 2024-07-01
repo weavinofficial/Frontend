@@ -28,10 +28,10 @@ class _ChatScreenState extends State<ChatScreen> {
             backgroundColor: Colors.transparent,
             body: Column(children: [
               //padding at the top
-              const SizedBox(height: 25),
+              const SizedBox(height: 15),
               Row(children: [
                 //padding before back button
-                const SizedBox(width: 22),
+                const SizedBox(width: 17),
                 IconButton(
                   padding: const EdgeInsets.all(0),
                   onPressed: () => Navigator.pop(context),
@@ -43,14 +43,14 @@ class _ChatScreenState extends State<ChatScreen> {
                 //padding after back button
                 const SizedBox(width: 12),
                 Container(
-                  width: 60,
-                  height: 60,
+                  width: 55,
+                  height: 55,
                   decoration: const ShapeDecoration(
                     color: Color(0xFFD9D9D9),
                     shape: OvalBorder(),
                   ),
                 ),
-                const SizedBox(width: 22),
+                const SizedBox(width: 18),
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   const Text(
                     'Luke Shim',
@@ -59,7 +59,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       fontSize: 16,
                       fontFamily: 'Noto Sans',
                       fontWeight: FontWeight.w900,
-                      height: 2,
+                      height: 1.5,
                     ),
                   ),
                   Text(
@@ -74,7 +74,8 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                 ]),
               ]),
-              const SizedBox(height: 16),
+              //padding below 'Online'
+              const SizedBox(height: 12),
               Expanded(
                 child: Container(
                   decoration: ShapeDecoration(

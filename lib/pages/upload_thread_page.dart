@@ -1,7 +1,7 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:myapp/photo_button.dart';
+import 'package:frontend/widgets/advanced_media_picker.dart';
+import 'package:image_picker/image_picker.dart';
 
 class UploadThreadPage extends StatefulWidget {
   const UploadThreadPage({super.key});
@@ -27,8 +27,8 @@ class _UploadThreadPageState extends State<UploadThreadPage> {
   bool isParmacy = false;
   bool isLaw = false;
   bool isOthers = false;
-  // bool _showPhotoButton = false;
   bool isChecked = false;
+  // bool _showPhotoButton = false;
   // void _togglePhotoButton() {
   //   setState(() {
   //     _showPhotoButton = !_showPhotoButton;
@@ -36,29 +36,30 @@ class _UploadThreadPageState extends State<UploadThreadPage> {
   // }
 
   File? _imageFile;
+  List<XFile> _selectedFiles = [];
 
-  void _showPhotoPicker() async {
-    final pickedFile = await showModalBottomSheet<File>(
-      context: context,
-      builder: (BuildContext context) {
-        return PhotoPicker();
-      },
-    );
-
-    if (pickedFile != null) {
-      setState(() {
-        _imageFile = pickedFile;
-      });
-    }
+  void _onFilesPicked(List<XFile> files) {
+    setState(() {
+      _selectedFiles = files;
+    });
   }
 
+  void _openPhotoPicker(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: PhotoPickerWidget(onFilesPicked: _onFilesPicked),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: LayoutBuilder(builder: (context, constraints) {
       return Stack(
         children: [
-          
           Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
@@ -1002,22 +1003,47 @@ class _UploadThreadPageState extends State<UploadThreadPage> {
 
                                 //Photo attaching button
                                 SizedBox(
-                                    width: 25,
-                                    child: ElevatedButton(
-                                      onPressed: _showPhotoPicker,
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.transparent,
-                                        shadowColor: Colors.transparent,
-                                        padding: EdgeInsets.zero,
-                                      ),
-                                      child: SizedBox(
-                                        child: Icon(
-                                          Icons.photo, // You can replace this with the desired video upload icon
-                                          color: Colors.white,
-                                        ), 
-                                      ),
-                                      ),
+                                  width: 25,
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        if (_selectedFiles.isNotEmpty)
+                                          Wrap(
+                                            spacing: 10,
+                                            runSpacing: 10,
+                                            children:
+                                                _selectedFiles.map((file) {
+                                              return Image.file(
+                                                File(file.path),
+                                                width: 100,
+                                                height: 100,
+                                                fit: BoxFit.cover,
+                                              );
+                                            }).toList(),
+                                          ),
+                                        ElevatedButton(
+                                          onPressed: () =>
+                                              _openPhotoPicker(context),
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.transparent,
+                                            shadowColor: Colors.transparent,
+                                            padding: EdgeInsets.zero,
+                                          ),
+                                          child: SizedBox(
+                                            width: 50,
+                                            height: 50,
+                                            child: Icon(
+                                              Icons.photo,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
+                                  ),
+                                ),
 
                                 const SizedBox(width: 10),
 
@@ -1175,15 +1201,13 @@ class _UploadThreadPageState extends State<UploadThreadPage> {
                   )
                 ],
               )),
-        
-        
 
-        // if (_showPhotoButton) 
-        //     Positioned.fill(
-        //       child:PhotoPicker(
+          // if (_showPhotoButton)
+          //     Positioned.fill(
+          //       child:PhotoPicker(
 
-        //       ),
-        //     )
+          //       ),
+          //     )
         ],
       );
     }));
