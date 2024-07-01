@@ -79,7 +79,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                               icon: Icon(icons[index]),
                               style: const ButtonStyle(
                                 foregroundColor:
-                                    MaterialStatePropertyAll(Colors.white),
+                                    WidgetStatePropertyAll(Colors.white),
                               ),
                             ),
                     ),
