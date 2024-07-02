@@ -9,11 +9,11 @@ import 'package:frontend/pages/upload_thread_page.dart';
 const Color bottonNavBgColor = Color(0x00ffc38a);
 
 const icons = [
-  Icons.home,
-  Icons.edit_document,
+  Icons.home_outlined,
+  Icons.paste_outlined,
   Icons.add,
-  Icons.email,
-  Icons.person
+  Icons.email_outlined,
+  Icons.person_2_outlined
 ];
 
 var pages = [
@@ -24,14 +24,13 @@ var pages = [
   const MyPage(),
 ];
 
-class CustomNavigationBar extends StatefulWidget {
-  const CustomNavigationBar({super.key});
+class CustomNavigationBar extends StatelessWidget {
+  final int selectedIndex;
+  final ValueChanged<int> onItemTapped;
 
-  @override
-  State<CustomNavigationBar> createState() => _CustomNavigationBarState();
-}
+  const CustomNavigationBar(
+      {super.key, required this.onItemTapped, required this.selectedIndex});
 
-class _CustomNavigationBarState extends State<CustomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -69,19 +68,14 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                               child: Container(),
                             )
                           : IconButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => pages[index],
-                                  ),
-                                );
-                              },
+                              onPressed: () => onItemTapped(index),
                               icon: Icon(icons[index]),
-                              style: const ButtonStyle(
-                                foregroundColor:
-                                    WidgetStatePropertyAll(Colors.white),
-                              ),
+                              style: ButtonStyle(
+                                  iconColor: selectedIndex == index
+                                      ? const WidgetStatePropertyAll(
+                                          Colors.white)
+                                      : const WidgetStatePropertyAll(
+                                          Colors.grey)),
                             ),
                     ),
                   ),

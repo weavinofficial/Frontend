@@ -82,11 +82,11 @@ class HomePage extends StatelessWidget {
               child: HomeHeader(
             isAdverse: isAdverse,
           )),
-          const Positioned(
-            child: Align(
-                alignment: Alignment.bottomCenter,
-                child: CustomNavigationBar()),
-          )
+          // const Positioned(
+          //   child: Align(
+          //       alignment: Alignment.bottomCenter,
+          //       child: CustomNavigationBar()),
+          // )
         ]),
       ),
     );

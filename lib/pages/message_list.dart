@@ -285,7 +285,7 @@ class _MessageListState extends State<MessageList> {
                     },
                   ),
                 ),
-                const CustomNavigationBar(),
+                // const CustomNavigationBar(),
               ],
             ),
           );

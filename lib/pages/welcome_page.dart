@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/pages/home_page.dart';
+import 'package:frontend/pages/main_screen.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -55,7 +56,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const HomePage(),
+                        builder: (context) => MainScreen(),
                       ),
                     );
                     //for testing
