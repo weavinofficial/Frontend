@@ -48,7 +48,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 padding: const EdgeInsets.only(left: 30, right: 30),
                 width: 350,
                 decoration: BoxDecoration(
-                  color: bottonNavBgColor.withOpacity(0.8),
+                  color: bottonNavBgColor.withOpacity(1),
                   borderRadius: const BorderRadius.all(Radius.circular(24)),
                   boxShadow: [
                     BoxShadow(
@@ -102,7 +102,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
             left: 148,
             top: 20,
             child: FloatingActionButton(
-              backgroundColor: bottonNavBgColor.withOpacity(0.8),
+              backgroundColor: bottonNavBgColor.withOpacity(1),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30)),
               onPressed: () {

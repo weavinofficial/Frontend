@@ -131,7 +131,6 @@ class _MessageListState extends State<MessageList> {
                     cursorColor: Colors.black,
                     cursorHeight: 14,
                     decoration: InputDecoration(
-                      floatingLabelBehavior: FloatingLabelBehavior.never,
                       prefixIcon: const Icon(
                         Icons.search,
                         size: 18,
@@ -172,39 +171,47 @@ class _MessageListState extends State<MessageList> {
                                 builder: (BuildContext context) {
                                   return Dialog(
                                     shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(4)),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
                                     child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 16,
-                                              right: 16,
-                                              bottom: 0,
-                                              top: 16),
-                                          child: Text(
-                                            chatRooms[index].name,
-                                            style: const TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold),
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 5, top: 18),
+                                            child: Text(
+                                              chatRooms[index].name,
+                                              style: const TextStyle(
+                                                  height: 0,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
                                           ),
-                                        ),
-                                        ListTile(
-                                          title: Text('Pin to top'),
-                                          onTap: () {
-                                            _pinChatRoom(index);
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                        ListTile(
-                                          title: Text('Leave chatroom'),
-                                          onTap: () {
-                                            _deleteChatRoom(index);
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                      ],
-                                    ),
+                                          ListTile(
+                                            title: const Text('Pin to top'),
+                                            onTap: () {
+                                              _pinChatRoom(index);
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                          ListTile(
+                                            title: const Text('Leave chatroom'),
+                                            onTap: () {
+                                              _deleteChatRoom(index);
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                          ListTile(
+                                            title: const Text('Mute messages'),
+                                            onTap: () {
+                                              // mute messages
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                          const SizedBox(height: 5)
+                                        ]),
                                   );
                                 },
                               );

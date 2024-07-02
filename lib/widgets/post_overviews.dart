@@ -23,7 +23,10 @@ class PostOverviews extends StatelessWidget {
                 postOverviewListType: PostOverviewListType.trending),
             PostOverviewList(
                 postOverviews: forYouPostOverviews,
-                postOverviewListType: PostOverviewListType.foryou)
+                postOverviewListType: PostOverviewListType.foryou),
+            const SizedBox(
+              height: 80,
+            )
           ],
         ),
       ),
