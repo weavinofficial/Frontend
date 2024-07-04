@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:advanced_media_picker/advanced_media_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:async';
-import 'dart:io';
 
 class PhotoPickerWidget extends StatefulWidget {
   final ValueChanged<List<XFile>> onFilesPicked;
@@ -32,8 +31,8 @@ class _PhotoPickerWidgetState extends State<PhotoPickerWidget> {
         allowedTypes: PickerAssetType.image,
         maxVideoDuration: 60,
         selectionLimit: 10,
-        showCamera: true,
-        videoCamera: true,
+        isNeedToShowCamera: true,
+        isNeedVideoCamera: true,
       );
 
       if (result != null && result.isNotEmpty) {
@@ -54,20 +53,8 @@ class _PhotoPickerWidgetState extends State<PhotoPickerWidget> {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        if (_selectedFiles.isNotEmpty)
-          Wrap(
-            spacing: 10,
-            runSpacing: 10,
-            children: _selectedFiles.map((file) {
-              return Image.file(
-                File(file.path),
-                width: 100,
-                height: 100,
-                fit: BoxFit.cover,
-              );
-            }).toList(),
-          ),
+      children: [
+
         ElevatedButton(
           onPressed: () => _openMediaPicker(context),
           style: ElevatedButton.styleFrom(
