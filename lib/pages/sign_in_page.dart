@@ -24,18 +24,19 @@ class SignInPage extends StatelessWidget {
                     alignment: Alignment.topRight,
                     child: Image.asset(
                       'assets/images/String_1.png',
-                      width: 180,
-                      height: 120,
+                      width: 150,
+                      height: 100,
                     ),
                   ),
+                  const SizedBox(height: 24),
                   const Padding(
-                    padding: EdgeInsets.only(left: 32.0),
+                    padding: EdgeInsets.only(left: 24.0),
                     child: Text(
                       'Welcome Back!',
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'GmarketSansTTF',
-                        fontSize: 54.0,
+                        fontSize: 42.0,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -47,12 +48,12 @@ class SignInPage extends StatelessWidget {
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'GmarketSansTTF',
-                        fontSize: 24.0,
+                        fontSize: 18.0,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 40.0),
+                  const SizedBox(height: 25.0),
                   Image.asset(
                     'assets/images/String_2.png',
                     height: 100.0,
@@ -61,8 +62,7 @@ class SignInPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 60),
                   Container(
-                    padding:
-                        const EdgeInsets.fromLTRB(32.0, 112.0, 32.0, 232.0),
+                    padding: const EdgeInsets.fromLTRB(32.0, 64.0, 32.0, 64.0),
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -161,8 +161,8 @@ class SignInPage extends StatelessWidget {
                             child: Align(
                               alignment: Alignment.topRight,
                               child: Container(
-                                width: 180.0,
-                                height: 55.0,
+                                width: 150.0,
+                                height: 45.0,
                                 margin:
                                     const EdgeInsets.only(top: 5.0, right: 5.0),
                                 decoration: BoxDecoration(
@@ -233,7 +233,7 @@ class SignInPage extends StatelessWidget {
           ),
           const Positioned(
             top: 24.0,
-            left: 28.0,
+            left: 18.0,
             child: Icon(
               Icons.arrow_back_ios_rounded,
               color: Colors.white,
@@ -244,3 +244,4 @@ class SignInPage extends StatelessWidget {
     );
   }
 }
+
