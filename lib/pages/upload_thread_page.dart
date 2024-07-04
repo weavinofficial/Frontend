@@ -1,7 +1,10 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:frontend/widgets/advanced_media_picker.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:advanced_media_picker/advanced_media_picker.dart';
+import 'package:frontend/widgets/file_attach_button.dart';
+
+
 
 class UploadThreadPage extends StatefulWidget {
   const UploadThreadPage({super.key});
@@ -13,29 +16,87 @@ class UploadThreadPage extends StatefulWidget {
 }
 
 class _UploadThreadPageState extends State<UploadThreadPage> {
-  bool isGeneral = false;
-  bool isHumor = false;
-  bool isIssue = false;
-  bool isDaily = false;
-  bool isTips = false;
-  bool isBusiness = false;
-  bool isCDE = false;
-  bool isCHS = false;
-  bool isComputing = false;
-  bool isMedicine = false;
-  bool isMusic = false;
-  bool isParmacy = false;
-  bool isLaw = false;
-  bool isOthers = false;
+  final TextEditingController _controller = TextEditingController();
+  TextStyle get _currentTextStyle {
+    return TextStyle(
+      fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+      color: Color(0xFF727272),
+      fontSize: 15,
+      fontFamily: 'Noto Sans',
+    );
+  }
   bool isChecked = false;
-  // bool _showPhotoButton = false;
-  // void _togglePhotoButton() {
-  //   setState(() {
-  //     _showPhotoButton = !_showPhotoButton;
-  //   });
-  // }
+  bool isBold = false;
+  // List of button states
+  List<bool> buttonStates = List.filled(15, false);
 
-  File? _imageFile;
+  // List of button labels
+  final List<String> buttonLabels = [
+    'General',
+    'Humor',
+    'Issue',
+    'Daily',
+    'Comp',
+    'Others',
+    'CDE',
+    'CHS',
+    'Tips',
+    'Medicine',
+    'Music',
+    'Pharm',
+    'Law',
+    'Dentistry',
+    'Business'
+  ];
+
+
+  Widget _buildButton(int index, BoxConstraints constraints) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () {
+          setState(() {
+            buttonStates[index] = !buttonStates[index];
+          });
+        },
+        borderRadius: BorderRadius.circular(30),
+        child: Container(
+          margin: EdgeInsets.symmetric(vertical: 4.0),
+          // Add some spacing between buttons
+          width: constraints.maxWidth * 60 / 393,
+          height: constraints.maxWidth * 24 / 393,
+          decoration: ShapeDecoration(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                width: 1,
+                color: buttonStates[index] ? Colors.black : Colors.white,
+              ),
+              borderRadius: BorderRadius.circular(30),
+            ),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                buttonLabels[index],
+                style: TextStyle(
+                  color: buttonStates[index] ? Colors.black : Colors.white,
+                  fontSize: 12,
+                  fontFamily: 'Noto Sans',
+                  fontWeight: FontWeight.w500,
+                  height: 1.2,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+
   List<XFile> _selectedFiles = [];
 
   void _onFilesPicked(List<XFile> files) {
@@ -44,673 +105,109 @@ class _UploadThreadPageState extends State<UploadThreadPage> {
     });
   }
 
-  void _openPhotoPicker(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: PhotoPickerWidget(onFilesPicked: _onFilesPicked),
-        );
-      },
-    );
-  }
+
+
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: LayoutBuilder(builder: (context, constraints) {
+    return Material(
+        child: LayoutBuilder(builder: (context, constraints) {
       return Stack(
         children: [
+
+
           Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
-                  begin: Alignment(0.81, -0.59),
-                  end: Alignment(-0.81, 0.59),
+                  begin: Alignment.bottomRight,
+                  end: Alignment.topLeft,
                   colors: [Color(0xFFF5CEC7), Color(0xFFE79796)],
                 ),
-                image: DecorationImage(
-                    image: AssetImage(
-                        "assets/images/upload_thread_page_image.png"),
-                    fit: BoxFit.cover,
-                    alignment: Alignment.topLeft),
+
               ),
 
               //Hashtags
-              child: Column(
+              child: SingleChildScrollView(child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minHeight: constraints.maxHeight,
+          ),
+          child: IntrinsicHeight( child: Column(
                 children: [
-                  SizedBox(height: constraints.maxHeight * 200 / 852),
-                  Row(children: [
-                    SizedBox(width: constraints.maxWidth * 22 / 393),
+                  SizedBox(height: constraints.maxHeight * 150 / 852),
 
-                    //General tag
-                    Material(
-                      color: Colors.transparent, // Transparent background
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            isGeneral = !isGeneral;
-                          });
-                        },
-                        borderRadius: BorderRadius.circular(30),
-                        child: Container(
-                          width: constraints.maxWidth * 63 / 393,
-                          height: constraints.maxWidth * 24 / 393,
-                          decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 1,
-                                  color:
-                                      isGeneral ? Colors.black : Colors.white),
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'General',
-                                style: TextStyle(
-                                  color:
-                                      isGeneral ? Colors.black : Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'Noto Sans',
-                                  fontWeight: FontWeight.w500,
-                                  height: 1.2, // Ensure proper text alignment
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+          Row(children: [
+                  SizedBox(width: constraints.maxWidth * 28 / 393),
 
-                    SizedBox(width: constraints.maxWidth * 11 / 393),
+                  //General tag
+                  _buildButton(0, constraints),
 
-                    //Humor tag
-                    Material(
-                      color: Colors.transparent, // Transparent background
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            isHumor = !isHumor;
-                          });
-                        },
-                        borderRadius: BorderRadius.circular(30),
-                        child: Container(
-                          width: constraints.maxWidth * 63 / 393,
-                          height: constraints.maxWidth * 24 / 393,
-                          decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 1,
-                                  color: isHumor ? Colors.black : Colors.white),
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Humor',
-                                style: TextStyle(
-                                  color: isHumor ? Colors.black : Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'Noto Sans',
-                                  fontWeight: FontWeight.w500,
-                                  height: 1.2, // Ensure proper text alignment
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                  SizedBox(width: constraints.maxWidth * 9 / 393),
 
-                    SizedBox(width: constraints.maxWidth * 11 / 393),
+                  //Humor tag
+                  _buildButton(1, constraints),
 
-                    //Issue tag
-                    Material(
-                      color: Colors.transparent, // Transparent background
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            isIssue = !isIssue;
-                          });
-                        },
-                        borderRadius: BorderRadius.circular(30),
-                        child: Container(
-                          width: constraints.maxWidth * 63 / 393,
-                          height: constraints.maxWidth * 24 / 393,
-                          decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 1,
-                                  color: isIssue ? Colors.black : Colors.white),
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Issue',
-                                style: TextStyle(
-                                  color: isIssue ? Colors.black : Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'Noto Sans',
-                                  fontWeight: FontWeight.w500,
-                                  height: 1.2, // Ensure proper text alignment
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                  SizedBox(width: constraints.maxWidth * 9 / 393),
 
-                    SizedBox(width: constraints.maxWidth * 11 / 393),
+                  //Issue tag
+                  _buildButton(2, constraints),
 
-                    //Daily tag
-                    Material(
-                      color: Colors.transparent, // Transparent background
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            isDaily = !isDaily;
-                          });
-                        },
-                        borderRadius: BorderRadius.circular(30),
-                        child: Container(
-                          width: constraints.maxWidth * 63 / 393,
-                          height: constraints.maxWidth * 24 / 393,
-                          decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 1,
-                                  color: isDaily ? Colors.black : Colors.white),
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Daily',
-                                style: TextStyle(
-                                  color: isDaily ? Colors.black : Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'Noto Sans',
-                                  fontWeight: FontWeight.w500,
-                                  height: 1.2, // Ensure proper text alignment
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                  SizedBox(width: constraints.maxWidth * 9 / 393),
 
-                    SizedBox(width: constraints.maxWidth * 11 / 393),
+                  //Daily tag
+                  _buildButton(3, constraints),
 
-                    //tips tag
-                    Material(
-                      color: Colors.transparent, // Transparent background
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            isTips = !isTips;
-                          });
-                        },
-                        borderRadius: BorderRadius.circular(30),
-                        child: Container(
-                          width: constraints.maxWidth * 50 / 393,
-                          height: constraints.maxWidth * 24 / 393,
-                          decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 1,
-                                  color: isTips ? Colors.black : Colors.white),
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Tips',
-                                style: TextStyle(
-                                  color: isTips ? Colors.black : Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'Noto Sans',
-                                  fontWeight: FontWeight.w500,
-                                  height: 1.2, // Ensure proper text alignment
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ]),
+                  SizedBox(width: constraints.maxWidth * 9 / 393),
 
-                  SizedBox(height: constraints.maxHeight * 4 / 852),
+                  //tips tag
+                  _buildButton(4, constraints),]),
 
-                  Row(children: [
-                    SizedBox(width: constraints.maxWidth * 50 / 393),
+          SizedBox(height: constraints.maxHeight * 4 / 852),
 
-                    //Business tag
-                    Material(
-                      color: Colors.transparent, // Transparent background
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            isBusiness = !isBusiness;
-                          });
-                        },
-                        borderRadius: BorderRadius.circular(30),
-                        child: Container(
-                          width: constraints.maxWidth * 63 / 393,
-                          height: constraints.maxWidth * 24 / 393,
-                          decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 1,
-                                  color:
-                                      isBusiness ? Colors.black : Colors.white),
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Business',
-                                style: TextStyle(
-                                  color:
-                                      isBusiness ? Colors.black : Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'Noto Sans',
-                                  fontWeight: FontWeight.w500,
-                                  height: 1.2, // Ensure proper text alignment
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+          Row(children: [
+                SizedBox(width: constraints.maxWidth * 60 / 393),
 
-                    SizedBox(width: constraints.maxWidth * 11 / 393),
-                    //CDE tag
-                    Material(
-                      color: Colors.transparent, // Transparent background
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            isCDE = !isCDE;
-                          });
-                        },
-                        borderRadius: BorderRadius.circular(30),
-                        child: Container(
-                          width: constraints.maxWidth * 63 / 393,
-                          height: constraints.maxWidth * 24 / 393,
-                          decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 1,
-                                  color: isCDE ? Colors.black : Colors.white),
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'CDE',
-                                style: TextStyle(
-                                  color: isCDE ? Colors.black : Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'Noto Sans',
-                                  fontWeight: FontWeight.w500,
-                                  height: 1.2, // Ensure proper text alignment
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                //Business tag
+                _buildButton(6, constraints),
 
-                    SizedBox(width: constraints.maxWidth * 11 / 393),
-                    //CHS tag
-                    Material(
-                      color: Colors.transparent, // Transparent background
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            isCHS = !isCHS;
-                          });
-                        },
-                        borderRadius: BorderRadius.circular(30),
-                        child: Container(
-                          width: constraints.maxWidth * 63 / 393,
-                          height: constraints.maxWidth * 24 / 393,
-                          decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 1,
-                                  color: isCHS ? Colors.black : Colors.white),
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'CHS',
-                                style: TextStyle(
-                                  color: isCHS ? Colors.black : Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'Noto Sans',
-                                  fontWeight: FontWeight.w500,
-                                  height: 1.2, // Ensure proper text alignment
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                SizedBox(width: constraints.maxWidth * 9 / 393),
+                //CDE tag
+                _buildButton(7, constraints),
 
-                    SizedBox(width: constraints.maxWidth * 11 / 393),
-                    //Computing tag
-                    Material(
-                      color: Colors.transparent, // Transparent background
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            isComputing = !isComputing;
-                          });
-                        },
-                        borderRadius: BorderRadius.circular(30),
-                        child: Container(
-                          width: constraints.maxWidth * 65 / 393,
-                          height: constraints.maxWidth * 24 / 393,
-                          decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 1,
-                                  color: isComputing
-                                      ? Colors.black
-                                      : Colors.white),
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Computing',
-                                style: TextStyle(
-                                  color:
-                                      isComputing ? Colors.black : Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'Noto Sans',
-                                  fontWeight: FontWeight.w500,
-                                  height: 1.2, // Ensure proper text alignment
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ]),
+                SizedBox(width: constraints.maxWidth * 9 / 393),
+                //CHS tag
+                _buildButton(9, constraints),
 
-                  SizedBox(height: constraints.maxHeight * 4 / 852),
+                SizedBox(width: constraints.maxWidth * 9 / 393),
+                //Computing tag
+                _buildButton(10, constraints),]),
 
-                  //Medicine tag
-                  Row(children: [
-                    SizedBox(width: constraints.maxWidth * 22 / 393),
-                    Material(
-                      color: Colors.transparent, // Transparent background
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            isMedicine = !isMedicine;
-                          });
-                        },
-                        borderRadius: BorderRadius.circular(30),
-                        child: Container(
-                          width: constraints.maxWidth * 63 / 393,
-                          height: constraints.maxWidth * 24 / 393,
-                          decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 1,
-                                  color:
-                                      isMedicine ? Colors.black : Colors.white),
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Medicine',
-                                style: TextStyle(
-                                  color:
-                                      isMedicine ? Colors.black : Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'Noto Sans',
-                                  fontWeight: FontWeight.w500,
-                                  height: 1.2, // Ensure proper text alignment
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+          SizedBox(height: constraints.maxHeight * 4 / 852),
 
-                    SizedBox(width: constraints.maxWidth * 11 / 393),
+          Row(children: [
 
-                    //Music tag
-                    Material(
-                      color: Colors.transparent, // Transparent background
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            isMusic = !isMusic;
-                          });
-                        },
-                        borderRadius: BorderRadius.circular(30),
-                        child: Container(
-                          width: constraints.maxWidth * 63 / 393,
-                          height: constraints.maxWidth * 24 / 393,
-                          decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 1,
-                                  color: isMusic ? Colors.black : Colors.white),
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Music',
-                                style: TextStyle(
-                                  color: isMusic ? Colors.black : Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'Noto Sans',
-                                  fontWeight: FontWeight.w500,
-                                  height: 1.2, // Ensure proper text alignment
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                SizedBox(width: constraints.maxWidth * 28 / 393),
+                //Medicine tag
+                _buildButton(11, constraints),
 
-                    SizedBox(width: constraints.maxWidth * 11 / 393),
+                SizedBox(width: constraints.maxWidth * 9 / 393),
 
-                    //Pharmacy tag
-                    Material(
-                      color: Colors.transparent, // Transparent background
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            isParmacy = !isParmacy;
-                          });
-                        },
-                        borderRadius: BorderRadius.circular(30),
-                        child: Container(
-                          width: constraints.maxWidth * 63 / 393,
-                          height: constraints.maxWidth * 24 / 393,
-                          decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 1,
-                                  color:
-                                      isParmacy ? Colors.black : Colors.white),
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Pharmacy',
-                                style: TextStyle(
-                                  color:
-                                      isParmacy ? Colors.black : Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'Noto Sans',
-                                  fontWeight: FontWeight.w500,
-                                  height: 1.2, // Ensure proper text alignment
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                //Music tag
+                _buildButton(12, constraints),
 
-                    SizedBox(width: constraints.maxWidth * 11 / 393),
+                SizedBox(width: constraints.maxWidth * 9 / 393),
 
-                    //Law tag
-                    Material(
-                      color: Colors.transparent, // Transparent background
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            isLaw = !isLaw;
-                          });
-                        },
-                        borderRadius: BorderRadius.circular(30),
-                        child: Container(
-                          width: constraints.maxWidth * 63 / 393,
-                          height: constraints.maxWidth * 24 / 393,
-                          decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 1,
-                                  color: isLaw ? Colors.black : Colors.white),
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Law',
-                                style: TextStyle(
-                                  color: isLaw ? Colors.black : Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'Noto Sans',
-                                  fontWeight: FontWeight.w500,
-                                  height: 1.2, // Ensure proper text alignment
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                //Pharmacy tag
+                _buildButton(13, constraints),
 
-                    SizedBox(width: constraints.maxWidth * 11 / 393),
+                SizedBox(width: constraints.maxWidth * 9 / 393),
 
-                    //Others tag
-                    Material(
-                      color: Colors.transparent, // Transparent background
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            isOthers = !isOthers;
-                          });
-                        },
-                        borderRadius: BorderRadius.circular(30),
-                        child: Container(
-                          width: constraints.maxWidth * 50 / 393,
-                          height: constraints.maxWidth * 24 / 393,
-                          decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 1,
-                                  color:
-                                      isOthers ? Colors.black : Colors.white),
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Others',
-                                style: TextStyle(
-                                  color: isOthers ? Colors.black : Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'Noto Sans',
-                                  fontWeight: FontWeight.w500,
-                                  height: 1.2, // Ensure proper text alignment
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ]),
+                //Law tag
+                _buildButton(14, constraints),
+
+                SizedBox(width: constraints.maxWidth * 9 / 393),
+
+                //Others tag
+                _buildButton(5, constraints),]),
 
                   const SizedBox(height: 15),
 
@@ -749,7 +246,7 @@ class _UploadThreadPageState extends State<UploadThreadPage> {
                                     fontFamily: 'Noto Sans',
                                     fontWeight: FontWeight.w700,
                                     height:
-                                        1.0, // Adjust this value as necessary
+                                    1.0, // Adjust this value as necessary
                                   ),
                                   decoration: InputDecoration(
                                     hintText: 'Title',
@@ -758,7 +255,7 @@ class _UploadThreadPageState extends State<UploadThreadPage> {
                                     ),
                                     border: InputBorder.none,
                                     isDense:
-                                        true, // Added this to adjust height
+                                    true, // Added this to adjust height
                                     contentPadding: EdgeInsets
                                         .zero, // Adjust this as necessary
                                   ),
@@ -795,16 +292,18 @@ class _UploadThreadPageState extends State<UploadThreadPage> {
                                     fontFamily: 'Noto Sans',
                                     fontWeight: FontWeight.w600,
                                     height:
-                                        1.0, // Adjust this value as necessary
+                                    1.0, // Adjust this value as necessary
                                   ),
                                   decoration: InputDecoration(
                                     hintText: 'Type',
                                     hintStyle: TextStyle(
                                       color: Color(0xFF727272),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.normal
                                     ),
                                     border: InputBorder.none,
                                     isDense:
-                                        true, // Added this to adjust height
+                                    true, // Added this to adjust height
                                     contentPadding: EdgeInsets
                                         .zero, // Adjust this as necessary
                                   ),
@@ -817,12 +316,12 @@ class _UploadThreadPageState extends State<UploadThreadPage> {
                     ),
                   ),
 
-                  SizedBox(height: constraints.maxHeight * 35 / 852),
+                  SizedBox(height: constraints.maxHeight * 20 / 852),
 
                   //Writing post body frame and shape
                   SizedBox(
-                    width: 297,
-                    height: 300,
+                    width: constraints.maxWidth * 0.85,
+                    height: constraints.maxHeight * 410 / 852,
                     child: Stack(
                       children: [
                         Positioned(
@@ -834,21 +333,21 @@ class _UploadThreadPageState extends State<UploadThreadPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(
-                                width: 297,
-                                height: 250,
+                                width: constraints.maxWidth * 0.85,
+                                height: constraints.maxHeight * 410 / 852,
                                 child: Stack(
                                   children: [
                                     Positioned(
                                       left: 0,
                                       top: 0,
                                       child: Container(
-                                        width: 297,
-                                        height: 250,
+                                        width: constraints.maxWidth * 0.85,
+                                        height: constraints.maxHeight * 410 / 852,
                                         decoration: ShapeDecoration(
                                           color: Colors.white.withOpacity(0.75),
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(20),
+                                            BorderRadius.circular(20),
                                           ),
                                         ),
                                       ),
@@ -857,8 +356,8 @@ class _UploadThreadPageState extends State<UploadThreadPage> {
                                       left: 0,
                                       top: 0,
                                       child: Container(
-                                        width: 297,
-                                        height: 45,
+                                        width: constraints.maxWidth * 0.85,
+                                        height: 50,
                                         decoration: const ShapeDecoration(
                                           color: Color(0xFFFFC98B),
                                           shape: RoundedRectangleBorder(
@@ -881,232 +380,53 @@ class _UploadThreadPageState extends State<UploadThreadPage> {
                         //Buttons
                         Column(
                           children: [
-                            const SizedBox(height: 7),
+                            // const SizedBox(height: ),
                             Row(
                               children: [
-                                const SizedBox(width: 25),
+                                const SizedBox(width: 15),
 
-                                //Bold button
-                                SizedBox(
-                                    width: 25,
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        // Handle button press
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.transparent,
-                                        shadowColor: Colors.transparent,
-                                        padding: EdgeInsets.zero,
-                                      ),
-                                      child: const Text(
-                                        'B',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontFamily: 'Noto Sans',
-                                          fontWeight: FontWeight.w700,
-                                          height: 0,
-                                        ),
-                                      ),
-                                    )),
-
-                                const SizedBox(width: 10),
-
-                                //Italic button
-                                SizedBox(
-                                    width: 25,
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        // Handle button press
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.transparent,
-                                        shadowColor: Colors.transparent,
-                                        padding: EdgeInsets.zero,
-                                      ),
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        width: 20, // Adjust width as needed
-                                        height: 20, // Adjust height as needed
-                                        decoration: const BoxDecoration(
-                                          color: Colors
-                                              .transparent, // Background color
-                                        ),
-                                        child: const Text(
-                                          'i',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                            fontStyle: FontStyle.italic,
-                                            fontFamily: 'Noto Sans',
-                                            fontWeight: FontWeight.w600,
-                                            height: 0,
-                                          ),
-                                        ),
-                                      ),
-                                    )),
-
-                                const SizedBox(width: 10),
-
-                                //Underline button
-                                SizedBox(
-                                    width: 25,
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        // Handle button press
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.transparent,
-                                        shadowColor: Colors.transparent,
-                                        padding: EdgeInsets.zero,
-                                      ),
-                                      child: const Text(
-                                        'U',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontFamily: 'Noto Sans',
-                                          fontWeight: FontWeight.w700,
-                                          decoration: TextDecoration.underline,
-                                          height: 0,
-                                        ),
-                                      ),
-                                    )),
-
-                                const SizedBox(width: 10),
-
-                                //Capitalization button
-                                SizedBox(
-                                    width: 25,
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        // Handle button press
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.transparent,
-                                        shadowColor: Colors.transparent,
-                                        padding: EdgeInsets.zero,
-                                      ),
-                                      child: const Text(
-                                        'Aa',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontFamily: 'Noto Sans',
-                                          fontWeight: FontWeight.w700,
-                                          height: 0,
-                                        ),
-                                      ),
-                                    )),
-
-                                const SizedBox(width: 10),
 
                                 //Photo attaching button
                                 SizedBox(
-                                  width: 25,
-                                  child: Center(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        if (_selectedFiles.isNotEmpty)
-                                          Wrap(
-                                            spacing: 10,
-                                            runSpacing: 10,
-                                            children:
-                                                _selectedFiles.map((file) {
-                                              return Image.file(
-                                                File(file.path),
-                                                width: 100,
-                                                height: 100,
-                                                fit: BoxFit.cover,
-                                              );
-                                            }).toList(),
-                                          ),
-                                        ElevatedButton(
-                                          onPressed: () =>
-                                              _openPhotoPicker(context),
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.transparent,
-                                            shadowColor: Colors.transparent,
-                                            padding: EdgeInsets.zero,
-                                          ),
-                                          child: SizedBox(
-                                            width: 50,
-                                            height: 50,
-                                            child: Icon(
-                                              Icons.photo,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                  width: 30,
+                                  child: PhotoPickerWidget(onFilesPicked: _onFilesPicked),
                                 ),
-
-                                const SizedBox(width: 10),
-
-                                //Video attaching button
-                                SizedBox(
-                                    width: 30,
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        // Handle button press
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.transparent,
-                                        shadowColor: Colors.transparent,
-                                        padding: EdgeInsets.zero,
-                                      ),
-                                      child: const SizedBox(
-                                        width: 20,
-                                        child: Icon(
-                                          Icons
-                                              .video_call, // You can replace this with the desired video upload icon
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    )),
 
                                 const SizedBox(width: 10),
 
                                 //Button for attaching files
                                 SizedBox(
                                     width: 30,
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        // Handle button press
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.transparent,
-                                        shadowColor: Colors.transparent,
-                                        padding: EdgeInsets.zero,
-                                      ),
-                                      child: const SizedBox(
-                                        width: 20,
-                                        child: Icon(
-                                          Icons.attach_file,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    )),
+                                    child: FilePickerWidget()),
+
+                                const SizedBox(width: 10),
+
+                                //Button for anonymous checking
+                                SizedBox(
+                                  width: 30,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+
+
+                                    ],
+                                  ),
+
+
+
+                                )
                               ],
                             ),
 
                             const SizedBox(height: 15),
 
                             //Text field for body of the post
-                            const SizedBox(
-                              height: 160,
-                              width: 240,
+                            SizedBox(
+                              height: constraints.maxHeight * 300 / 852,
+                              width: constraints.maxWidth * 0.75,
                               child: TextField(
-                                style: TextStyle(
-                                  color: Color(0xFF727272),
-                                  fontSize: 15,
-                                  fontFamily: 'Noto Sans',
-                                  fontWeight: FontWeight.w600,
-                                ),
+                                controller: _controller,
+                                style: _currentTextStyle,
                                 keyboardType: TextInputType.multiline,
                                 maxLines: null, // Allow multiple lines
                                 // Allow text to wrap to next line
@@ -1118,98 +438,73 @@ class _UploadThreadPageState extends State<UploadThreadPage> {
                                     color: Color(0xFF727272),
                                     fontSize: 15,
                                     fontFamily: 'Noto Sans',
-                                    fontWeight: FontWeight.w600,
+                                    fontWeight: FontWeight.normal,
                                   ),
                                   border: InputBorder.none,
                                 ),
                               ),
                             ),
-                            SizedBox(height: 10),
-                            //anonymous checkbox
-                            Row(
-                              children: [
-                                const SizedBox(width: 160),
-                                const Text(
-                                  'Anonymous?',
-                                  style: TextStyle(
-                                    color: Color(0xFF727272),
-                                    fontSize: 15,
-                                    fontFamily: 'Noto Sans',
-                                    fontWeight: FontWeight.w600,
-                                    height: 0,
-                                  ),
-                                ),
-                                const SizedBox(width: 5),
-                                GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      isChecked =
-                                          !isChecked; // Toggle the state
-                                    });
-                                  },
-                                  child: Container(
-                                    width: 14,
-                                    height: 14,
-                                    decoration: ShapeDecoration(
-                                      shape: RoundedRectangleBorder(
-                                        side: const BorderSide(
-                                            width: 1, color: Color(0xFFE79796)),
-                                        borderRadius: BorderRadius.circular(3),
-                                      ),
-                                    ),
-                                    child: isChecked
-                                        ? const Icon(
-                                            Icons.check,
-                                            color: Color(0xFFE79796),
-                                            size: 14,
-                                          ) // Show checkmark if checked
-                                        : null,
-                                  ),
-                                )
-                              ],
-                            ),
+
                           ],
                         )
                       ],
                     ),
                   ),
 
-                  //Post button
-                  TextButton(
-                    onPressed: () {
-                      // Handle "Post" button press
-                    },
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.transparent, // Background color
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 14, vertical: 8), // Padding
-                      shape: RoundedRectangleBorder(
-                        side: const BorderSide(
-                            width: 1, color: Colors.white), // Border
-                        borderRadius: BorderRadius.circular(40), // BorderRadius
-                      ),
-                    ),
-                    child: const Text(
-                      'Post',
-                      style: TextStyle(
-                        fontSize: 35,
-                        fontFamily: 'Noto Sans',
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  )
+
+
+
                 ],
-              )),
+              )
+          )
+              )
+              )
+          ),
+          Positioned(
+            top: 20,
+            child: Container(
+                width: constraints.maxWidth,
+                height: constraints.maxHeight,
+                child : Image.asset("assets/images/upload_thread_page_image.png"))
+          )
+          ,
+          // Post button
 
-          // if (_showPhotoButton)
-          //     Positioned.fill(
-          //       child:PhotoPicker(
 
-          //       ),
-          //     )
-        ],
+          Positioned(
+              top: constraints.maxWidth  * 1.7,
+              left: constraints.maxWidth * 0.37,
+
+              child: TextButton(
+            onPressed: () {
+              // Handle "Post" button press
+            },
+            style: TextButton.styleFrom(
+              foregroundColor: Colors.white,
+              backgroundColor: const Color(0xFFF5CEC7), // Background color
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 14, vertical: 8), // Padding
+              shape: RoundedRectangleBorder(
+                side: const BorderSide(
+                    width: 1, color: Colors.transparent), // Border
+                borderRadius: BorderRadius.circular(40), // BorderRadius
+              ),
+            ),
+            child: const Text(
+              'Post',
+              style: TextStyle(
+                fontSize: 35,
+                fontFamily: 'Noto Sans',
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          )),
+        ]
       );
-    }));
-  }
-}
+        }))
+    ;}}
+
+
+
+
+
