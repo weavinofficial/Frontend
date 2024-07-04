@@ -8,12 +8,27 @@ import 'package:frontend/pages/upload_thread_page.dart';
 
 const Color bottonNavBgColor = Color(0x00ffc38a);
 
-const icons = [
-  Icons.home_outlined,
-  Icons.paste_outlined,
-  Icons.add,
-  Icons.email_outlined,
-  Icons.person_2_outlined
+var icons = [
+  Image.asset(
+    'assets/images/Home_IconButton.png',
+    width: 30,
+  ),
+  Image.asset(
+    'assets/images/News_IconButton.png',
+    width: 35,
+  ),
+  Image.asset(
+    'assets/images/Add_IconButton.png',
+    width: 50,
+  ),
+  Image.asset(
+    'assets/images/Message_IconButton.png',
+    width: 30,
+  ),
+  Image.asset(
+    'assets/images/Profile_IconButton.png',
+    width: 20,
+  ),
 ];
 
 var pages = [
@@ -44,7 +59,7 @@ class CustomNavigationBar extends StatelessWidget {
             child: SizedBox(
               height: 56,
               child: Container(
-                padding: const EdgeInsets.only(left: 30, right: 30),
+                padding: const EdgeInsets.only(left: 25, right: 30),
                 width: 350,
                 decoration: BoxDecoration(
                   color: bottonNavBgColor.withOpacity(1),
@@ -57,38 +72,41 @@ class CustomNavigationBar extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Stack(alignment: Alignment.center, children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: List.generate(
-                      5,
-                      (index) => index == 2
-                          ? SizedBox(
-                              width: 50,
-                              child: Container(),
-                            )
-                          : IconButton(
-                              onPressed: () => onItemTapped(index),
-                              icon: Icon(icons[index]),
-                              style: ButtonStyle(
-                                  iconColor: selectedIndex == index
-                                      ? const WidgetStatePropertyAll(
-                                          Colors.white)
-                                      : const WidgetStatePropertyAll(
-                                          Colors.grey)),
-                            ),
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: List.generate(
+                        5,
+                        (index) => index == 2
+                            ? SizedBox(
+                                width: 50,
+                                child: Container(),
+                              )
+                            : IconButton(
+                                icon: icons[index],
+                                onPressed: () => onItemTapped(index),
+                                style: ButtonStyle(
+                                    iconColor: selectedIndex == index
+                                        ? const WidgetStatePropertyAll(
+                                            Colors.white)
+                                        : const WidgetStatePropertyAll(
+                                            Colors.grey)),
+                              ),
+                      ),
                     ),
-                  ),
-                  Positioned(
-                    top: -35,
-                    child: Container(
-                      height: 65,
-                      width: 65,
-                      decoration: const BoxDecoration(
-                          color: Colors.transparent, shape: BoxShape.circle),
+                    Positioned(
+                      top: -35,
+                      child: Container(
+                        height: 65,
+                        width: 65,
+                        decoration: const BoxDecoration(
+                            color: Colors.transparent, shape: BoxShape.circle),
+                      ),
                     ),
-                  ),
-                ]),
+                  ],
+                ),
               ),
             ),
           ),

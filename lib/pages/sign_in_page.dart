@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/pages/main_screen.dart';
+import 'package:frontend/pages/welcome_page.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
@@ -184,7 +186,15 @@ class SignInPage extends StatelessWidget {
                                   ],
                                 ),
                                 child: ElevatedButton(
-                                  onPressed: () {}, // 다음 페이지로 이동
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const WelcomePage(),
+                                      ),
+                                    );
+                                  }, // 다음 페이지로 이동
                                   style: ButtonStyle(
                                     shadowColor: const MaterialStatePropertyAll(
                                         Colors.transparent),
@@ -244,4 +254,3 @@ class SignInPage extends StatelessWidget {
     );
   }
 }
-

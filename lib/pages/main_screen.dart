@@ -7,8 +7,10 @@ import 'package:frontend/pages/upload_thread_page.dart';
 import 'package:frontend/widgets/navigation_bar.dart';
 
 class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
   @override
-  _MainScreenState createState() => _MainScreenState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
@@ -18,7 +20,7 @@ class _MainScreenState extends State<MainScreen> {
     const HomePage(),
     const CommunityPage(),
     const UploadThreadPage(),
-    MessageList(),
+    const MessageList(),
     const MyPage(),
   ];
 
@@ -32,6 +34,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
+        alignment: Alignment.center,
         children: <Widget>[
           Positioned.fill(
             child: IndexedStack(
@@ -39,8 +42,8 @@ class _MainScreenState extends State<MainScreen> {
               children: _pages,
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
+          Positioned(
+            bottom: -8,
             child: CustomNavigationBar(
               selectedIndex: _selectedIndex,
               onItemTapped: _onItemTapped,

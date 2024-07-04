@@ -24,7 +24,18 @@ class StartPage extends StatelessWidget {
             child: Column(
               children: [
                 //padding above title
-                SizedBox(height: constraints.maxHeight * 0.18),
+                // SizedBox(height: constraints.maxHeight * 0.18),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Image.asset(
+                      'assets/images/yarn01.png',
+                      alignment: Alignment.topRight,
+                      width: 170,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 50),
                 Row(
                   children: [
                     SizedBox(width: constraints.maxWidth * 0.08),
@@ -89,8 +100,8 @@ class StartPage extends StatelessWidget {
                     height: constraints.maxHeight * 0.064,
                     child: TextButton(
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.transparent),
+                        backgroundColor:
+                            WidgetStateProperty.all<Color>(Colors.transparent),
                       ),
                       onPressed: () {
                         Navigator.push(

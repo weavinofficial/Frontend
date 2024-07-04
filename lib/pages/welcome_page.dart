@@ -19,6 +19,7 @@ class _WelcomePageState extends State<WelcomePage> {
     return Scaffold(
       body: LayoutBuilder(builder: (context, constraints) {
         return Stack(
+          alignment: Alignment.center,
           children: <Widget>[
             SizedBox(
               width: constraints.maxWidth,
@@ -29,10 +30,9 @@ class _WelcomePageState extends State<WelcomePage> {
               ),
             ),
             Positioned(
-              left: constraints.maxWidth * 0.25,
               top: constraints.maxHeight * 0.8,
               child: SizedBox(
-                width: 200,
+                width: 180,
                 height: 45,
                 child: OutlinedButton.icon(
                   label: const Icon(
@@ -40,11 +40,11 @@ class _WelcomePageState extends State<WelcomePage> {
                     color: Color(0xFFE79796),
                   ),
                   icon: const Text(
-                    'Get Started',
+                    '   Get Started     ',
                     style: TextStyle(
                       fontFamily: 'GmarketSansTTF',
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w900,
                       color: Color(0xFFE79796),
                     ),
                   ),

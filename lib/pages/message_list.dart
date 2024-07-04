@@ -16,7 +16,7 @@ class ChatRoom {
 }
 
 class MessageList extends StatefulWidget {
-  MessageList({super.key});
+  const MessageList({super.key});
 
   @override
   State<MessageList> createState() => _MessageListState();
