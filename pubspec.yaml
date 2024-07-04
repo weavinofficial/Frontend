@@ -94,7 +94,7 @@ flutter:
    - assets/images/Message_IconButton.png
    - assets/images/Profile_IconButton.png
    - assets/images/Add_IconButton.png
-
+   - assets/images/Heart_Fill.png
    
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

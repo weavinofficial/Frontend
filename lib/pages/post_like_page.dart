@@ -19,12 +19,20 @@ class _PostLikePage extends State<PostLikePage> {
     });
   }
 
+  void _decrementCounter() {
+    setState(() {
+      _counter--;
+    });
+  }
+  
   void _toggleLike() {
     setState(
       () {
         _isLiked = !_isLiked;
         if (_isLiked) {
           _incrementCounter();
+        } else {
+          _decrementCounter();
         }
       },
     );
@@ -119,9 +127,11 @@ class _PostLikePage extends State<PostLikePage> {
                                 width: 10,
                               ),
                               GestureDetector(
-                                onTap: _toggleLike, // 클릭시 하트 색 채워짐, 카운트 증가
+                                onTap: _toggleLike,
                                 child: Image.asset(
-                                    'assets/images/Heart_Icon.png',
+                                     _isLiked
+                                        ? 'assets/images/Heart_Fill.png'
+                                        : 'assets/images/Heart_Icon.png',
                                     width: 17),
                               ),
                               const SizedBox(width: 5),
