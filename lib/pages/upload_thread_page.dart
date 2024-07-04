@@ -4,8 +4,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:advanced_media_picker/advanced_media_picker.dart';
 import 'package:frontend/widgets/file_attach_button.dart';
 
-
-
 class UploadThreadPage extends StatefulWidget {
   const UploadThreadPage({super.key});
 
@@ -117,17 +115,28 @@ class _UploadThreadPageState extends State<UploadThreadPage> {
 
 
           Container(
+
               decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/upload_thread_page_image.png"),
+                  fit: BoxFit.cover,
+                  alignment: FractionalOffset(0, -50 / 852),
+                ),
+
+
                 gradient: LinearGradient(
+
                   begin: Alignment.bottomRight,
                   end: Alignment.topLeft,
                   colors: [Color(0xFFF5CEC7), Color(0xFFE79796)],
+
                 ),
 
               ),
 
               //Hashtags
-              child: SingleChildScrollView(child: ConstrainedBox(
+
+            child : SingleChildScrollView(child: ConstrainedBox(
           constraints: BoxConstraints(
             minHeight: constraints.maxHeight,
           ),
@@ -444,7 +453,52 @@ class _UploadThreadPageState extends State<UploadThreadPage> {
                                 ),
                               ),
                             ),
+                            // SizedBox(height: 10),
 
+
+                            //anonymous checkbox
+                            // Row(
+                            //   children: [
+                            //     const SizedBox(width: 160),
+                            //     const Text(
+                            //       'Anonymous?',
+                            //       style: TextStyle(
+                            //         color: Color(0xFF727272),
+                            //         fontSize: 15,
+                            //         fontFamily: 'Noto Sans',
+                            //         fontWeight: FontWeight.w600,
+                            //         height: 0,
+                            //       ),
+                            //     ),
+                            //     const SizedBox(width: 5),
+                            //     GestureDetector(
+                            //       onTap: () {
+                            //         setState(() {
+                            //           isChecked =
+                            //           !isChecked; // Toggle the state
+                            //         });
+                            //       },
+                            //       child: Container(
+                            //         width: 14,
+                            //         height: 14,
+                            //         decoration: ShapeDecoration(
+                            //           shape: RoundedRectangleBorder(
+                            //             side: const BorderSide(
+                            //                 width: 1, color: Color(0xFFE79796)),
+                            //             borderRadius: BorderRadius.circular(3),
+                            //           ),
+                            //         ),
+                            //         child: isChecked
+                            //             ? const Icon(
+                            //           Icons.check,
+                            //           color: Color(0xFFE79796),
+                            //           size: 14,
+                            //         ) // Show checkmark if checked
+                            //             : null,
+                            //       ),
+                            //     )
+                            //   ],
+                            // ),
                           ],
                         )
                       ],
@@ -460,14 +514,19 @@ class _UploadThreadPageState extends State<UploadThreadPage> {
               )
               )
           ),
-          Positioned(
-            top: 20,
-            child: Container(
-                width: constraints.maxWidth,
-                height: constraints.maxHeight,
-                child : Image.asset("assets/images/upload_thread_page_image.png"))
-          )
-          ,
+          // const Positioned(
+          //   child: Align(
+          //       alignment: Alignment.bottomCenter,
+          //       child: CustomNavigationBar()),
+          // ),
+          // Positioned(
+          //   top: 20,
+          //   child: Container(
+          //       width: constraints.maxWidth,
+          //       height: constraints.maxHeight,
+          //       child : Image.asset("assets/images/upload_thread_page_image.png"))
+          // )
+          // ,
           // Post button
 
 
@@ -499,10 +558,20 @@ class _UploadThreadPageState extends State<UploadThreadPage> {
               ),
             ),
           )),
+
+
+
+
         ]
       );
         }))
     ;}}
+
+
+
+
+
+
 
 
 
