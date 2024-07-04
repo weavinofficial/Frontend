@@ -88,7 +88,13 @@ flutter:
    - assets/images/Report_Icon.png   
    - assets/images/Share_Icon.png    
    - assets/images/String_1.png      
-   - assets/images/String_2.png      
+   - assets/images/String_2.png
+   - assets/images/Home_IconButton.png
+   - assets/images/News_IconButton.png
+   - assets/images/Message_IconButton.png
+   - assets/images/Profile_IconButton.png
+   - assets/images/Add_IconButton.png
+
    
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
