@@ -35,7 +35,7 @@ var pages = [
   const HomePage(),
   const CommunityPage(),
   const UploadThreadPage(),
-  MessageList(),
+  const MessageList(),
   const MyPage(),
 ];
 
@@ -117,14 +117,7 @@ class CustomNavigationBar extends StatelessWidget {
               backgroundColor: bottonNavBgColor.withOpacity(1),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30)),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => pages[2],
-                  ),
-                );
-              },
+              onPressed: () => onItemTapped(2),
               child: const Icon(
                 Icons.add,
                 color: Colors.white,

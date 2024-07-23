@@ -18,7 +18,7 @@ class _UploadThreadPageState extends State<UploadThreadPage> {
   TextStyle get _currentTextStyle {
     return TextStyle(
       fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
-      color: Color(0xFF727272),
+      color: const Color(0xFF727272),
       fontSize: 15,
       fontFamily: 'Noto Sans',
     );

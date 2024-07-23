@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/pages/home_page.dart';
+import 'package:frontend/widgets/data_search.dart';
 
 import 'package:frontend/widgets/home_heading/advert.dart';
 
@@ -70,74 +71,38 @@ class _HomeHeaderState extends State<HomeHeader> {
                     children: [
                       Container(
                         padding: const EdgeInsets.only(top: 25),
-                        child: SearchAnchor(
-                            viewElevation: 0,
-                            viewShape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15))),
-                            viewConstraints: const BoxConstraints(
-                                maxHeight: 400, maxWidth: 400),
-                            viewBackgroundColor:
-                                const Color.fromARGB(255, 254, 248, 248),
-                            viewSurfaceTintColor:
-                                const Color.fromARGB(0, 0, 0, 0),
-                            builder: (BuildContext context,
-                                SearchController controller) {
-                              return SearchBar(
-                                elevation: const WidgetStatePropertyAll(0),
-                                controller: controller,
-                                constraints: const BoxConstraints(
-                                    minHeight: 35, maxWidth: 230),
-                                // textStyle: const WidgetStatePropertyAll(
-                                //     TextStyle(
-                                //         color: Colors.black, fontSize: 20)),
-                                backgroundColor: const WidgetStatePropertyAll(
-                                    Color.fromRGBO(249, 224, 224, 1)),
-                                surfaceTintColor: const WidgetStatePropertyAll(
-                                    Color.fromRGBO(0, 0, 0, 0)),
-                                overlayColor: const WidgetStatePropertyAll(
-                                    Color.fromRGBO(249, 224, 224, 1)),
-                                // padding:
-                                //     const WidgetStatePropertyAll<EdgeInsets>(
-                                //         EdgeInsets.symmetric(horizontal: 5.0)),
-                                onTap: () {
-                                  controller.openView();
-                                },
-                                onChanged: (_) {
-                                  controller.openView();
-                                },
-                                hintText: 'Search',
-                                hintStyle: const WidgetStatePropertyAll(
-                                  TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 13,
-                                    fontFamily: 'GmarketSans',
-                                    fontWeight: FontWeight.w500,
-                                    height: 0,
-                                  ),
-                                ),
-                                leading: const Icon(
-                                  Icons.search,
-                                  color: Colors.white,
-                                ),
-                              );
-                            },
-                            suggestionsBuilder: (BuildContext context,
-                                SearchController controller) {
-                              return List<ListTile>.generate(5, (int index) {
-                                final String item = 'item $index';
-                                return ListTile(
-                                  minTileHeight: 45,
-                                  title: Text(item),
-                                  titleTextStyle: const TextStyle(fontSize: 13),
-                                  onTap: () {
-                                    setState(() {
-                                      controller.closeView(item);
-                                    });
-                                  },
-                                );
-                              });
-                            }),
+                        child: SearchBar(
+                          elevation: const WidgetStatePropertyAll(0),
+                          constraints: const BoxConstraints(
+                              minHeight: 35, maxWidth: 230),
+                          backgroundColor: const WidgetStatePropertyAll(
+                              Color.fromRGBO(249, 224, 224, 1)),
+                          surfaceTintColor: const WidgetStatePropertyAll(
+                              Color.fromRGBO(0, 0, 0, 0)),
+                          overlayColor: const WidgetStatePropertyAll(
+                              Color.fromRGBO(249, 224, 224, 1)),
+                          onTap: () {
+                            showSearch(
+                              context: context,
+                              delegate: DataSearch(),
+                            );
+                          },
+                          // onChanged: (_) {},
+                          hintText: 'Search',
+                          hintStyle: const WidgetStatePropertyAll(
+                            TextStyle(
+                              color: Colors.white,
+                              fontSize: 13,
+                              fontFamily: 'GmarketSans',
+                              fontWeight: FontWeight.w500,
+                              height: 0,
+                            ),
+                          ),
+                          leading: const Icon(
+                            Icons.search,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ]),
                 const SizedBox(height: 10),
